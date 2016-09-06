@@ -25,7 +25,7 @@
 
     <footer>
         <div class="wrap">
-            <p> PAGINA 2 <strong> PROBANDO &amp; </strong>PROBANDING</p>
+            <p> PAGINA 2 <strong> PROBANDO </strong>SPRING</p>
         </div>
     </footer>
 
