@@ -6,7 +6,7 @@
 <body>
 <header>
     <div class="image">
-        <img src="https://www.sound-ideas.com/Images/category/banners/water-underwater-sound-effects-banner.jpg" height="349" width="1240" alt="" class="header-img">
+        <img src="https://www.sound-ideas.com/Images/category/banners/water-underwater-sound-effects-banner.jpg" height="349" width="1240" class="header-img">
         <div class="cabecera">
             <h1><strong><code>BIENVENIDOS A MI PRIMER APLICACION WEB</code></strong></h1>
         </div>
@@ -26,7 +26,7 @@
 
 <footer>
     <div class="wrap">
-        <p>&copy; 2016 <strong>Kevin &amp; Co</strong>, Todos los derechos reservados</p>
+        <p>&copy; 2016 <strong>Aye &amp; Kevin</strong>, Todos los derechos reservados</p>
     </div>
 </footer>
 

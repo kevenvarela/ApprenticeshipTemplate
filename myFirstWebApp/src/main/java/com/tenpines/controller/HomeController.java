@@ -1,5 +1,6 @@
 package com.tenpines.controller;
 
+import com.tenpines.Sumador;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -7,15 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = "/")
-    public String home() {
+    @RequestMapping(value = "/sumador")
+    public String suma() {
 
-        return "test";
+        return "paginaSumador";
     }
+    @RequestMapping(value = "/resultado")
+    public String resultado() {
+        Sumador sumador_web = new Sumador();
 
-    @RequestMapping(value = "/home")
-    public String page1() {
+        //sumador_web.sumar(,b);
 
-        return "test2";
+        return "resultadoSumador";
     }
 }

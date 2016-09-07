@@ -10,7 +10,7 @@
             <div class="video-title">La ciudad</div>
             <div class="video-subtitle">Video de prueba</div>
             <div class="video-block">
-                <iframe src="//player.vimeo.com/video/106575373?portrait=0" width="814" height="458" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe src="//player.vimeo.com/video/106575373?portrait=0" width="814" height="458" frameborder="6" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
 
                 <header>

@@ -1,21 +1,22 @@
-import com.tenpines.Agenda;
+import com.tenpines.Sumador;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class AgendaTest {
+public class SumadorTest {
 
-    private Agenda agenda;
+    private Sumador sumador;
 
     @Before
     public void setUp() {
-        agenda = new Agenda();
+        sumador = new Sumador();
+
     }
 
     @Test
     public void test001(){
-        assertThat(agenda.mostrarFecha()).isEqualTo("05/09/2016");
+        assertThat(sumador.sumar(2,6)).isEqualTo(8);
     }
 }
