@@ -14,9 +14,4 @@ public class SumadorTest {
         sumador = new Acumulador();
 
     }
-
-    @Test
-    public void test001(){
-        assertThat(sumador.sumar(2,6)).isEqualTo(8);
-    }
 }

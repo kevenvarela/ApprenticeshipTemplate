@@ -2,6 +2,7 @@ package com.tenpines.controller;
 
 import com.tenpines.Acumulador;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,15 +17,20 @@ public class HomeController {
 
         return "paginaSumador";
     }
+
     @RequestMapping(value = "/resultado")
     public ModelAndView resultado() {
         ModelAndView mav = new ModelAndView();
         LocalDateTime laHora = LocalDateTime.now();
         Acumulador unAcumulador = new Acumulador();
+        String unString;
+
+        unString = "adasdasd";
 
         mav.setViewName("resultadoSumador");
         mav.addObject("hora", laHora);
         mav.addObject("acumulador", unAcumulador);
+        mav.addObject("piripitonga", unString);
         return mav;
     }
 }
