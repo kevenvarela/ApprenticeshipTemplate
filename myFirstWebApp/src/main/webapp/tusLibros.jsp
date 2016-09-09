@@ -8,9 +8,11 @@
     <body>
         <h1>TusLibros.com</h1>
 
-        <p>La hora es: ${hora}</p>
+        <p>La hora es: ${horaActual}</p>
 
         <p>El numero es: ${numero}</p>
+
+        <p>Tu carrito es: ${unCarrito.obtenerContenido()}</p>
 
 
 
