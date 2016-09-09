@@ -17,8 +17,8 @@ public class RepositorioTest {
     }
 
     @Test
-    public void test1(){
-        repositorio.guardar("libro");
-        assertThat(repositorio.tomar(0)).isEqualTo("libro");
+    public void test1GuardoUnItemEnElReposositorioYAlSolicitarloObtengoElMismoItem(){
+        repositorio.guardar("1","libro");
+        assertThat(repositorio.tomar("1")).isEqualTo("libro");
     }
 }

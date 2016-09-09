@@ -1,6 +1,6 @@
 package com.tenpines;
 
-import org.assertj.core.api.AbstractBigDecimalAssert;
+//import org.assertj.core.api.AbstractBigDecimalAssert;
 
 import java.util.ArrayList;
 
@@ -36,11 +36,11 @@ public class Carrito {
                 items.stream().filter((item) -> item.equals(unItem)).count());
     }
 
-    public Integer cantidadTotalDeItems() {
+    public Integer contidadTotalDeItems() {
         return items.size();
     }
 
-    public ArrayList<String> obtenerContenido(){
+    public ArrayList<String> contenido(){
         return items;
     }
 }
