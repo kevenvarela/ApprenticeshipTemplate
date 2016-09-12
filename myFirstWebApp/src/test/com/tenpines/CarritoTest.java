@@ -39,7 +39,7 @@ public class CarritoTest{
     public void test004AlAgregarUnaCantidadDeItemsLaCantidadTotalDeEllosEsLaMismaCantidad(){
         carrito.agregarItem("Guerra de los mundos");
         carrito.agregarItem("El Principito");
-        assertThat(carrito.contidadTotalDeItems()).isEqualTo(2);
+        assertThat(carrito.cantidadTotalDeItems()).isEqualTo(2);
     }
 
     @Test

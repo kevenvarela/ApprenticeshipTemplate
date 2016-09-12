@@ -36,7 +36,7 @@ public class Carrito {
                 items.stream().filter((item) -> item.equals(unItem)).count());
     }
 
-    public Integer contidadTotalDeItems() {
+    public Integer cantidadTotalDeItems() {
         return items.size();
     }
 

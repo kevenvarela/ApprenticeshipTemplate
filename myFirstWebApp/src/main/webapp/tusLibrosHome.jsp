@@ -9,7 +9,7 @@
         <h1>TusLibros.com</h1>
 
         <p>La hora es: ${hora}</p>
-        <a href="/nueva_compra"><input type="Button" value="Crear carrito nuevo"/> </a>
+        <a href="/nueva_compra"><input type="Button" value="Crear carrito nuevo   "/> </a>
         <br/>
 
 
