@@ -17,6 +17,7 @@ public class CarritoTest{
     public void setUp() {
         provedor = new ProvedorDeObjetos();
         carrito = provedor.carritoVacio();
+        carrito.inicializarCatalogo();
     }
 
     @Test
@@ -40,7 +41,7 @@ public class CarritoTest{
     @Test
     public void test004AlAgregarUnaCantidadDeItemsLaCantidadTotalDeEllosEsLaMismaCantidad(){
         carrito.agregarItem("Guerra de los mundos");
-        carrito.agregarItem("El Principito");
+        carrito.agregarItem("Nacidos de la bruma");
         assertThat(carrito.cantidadTotalDeItems()).isEqualTo(2);
     }
 

@@ -2,20 +2,19 @@ package com.tenpines.starter.modelo;
 
 import com.tenpines.starter.rest.AgregarRequest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
 public class Carrito {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //private ArrayList<String> contenido = new ArrayList<String>();
+//    @OneToMany
+    private ArrayList<String> items = new ArrayList<String>();
 
     private String cliente;
 
@@ -23,6 +22,7 @@ public class Carrito {
     }
 
     public Carrito(AgregarRequest carrito) {
+        this.inicializarCatalogo();
     }
 
     //PERSISTENCIA
@@ -35,13 +35,13 @@ public class Carrito {
         return id;
     }
 
-//    public void setContenido(ArrayList<String> contenido) {
-//        this.contenido = contenido;
-//    }
-//
-//    public ArrayList<String> getContenido() {
-//        return contenido;
-//    }
+    public void setItems(ArrayList<String> unItem) {
+        this.items = unItem;
+    }
+
+    public ArrayList<String> getItems() {
+        return items;
+    }
 
 //    public String getCliente() {
 //        return cliente;
@@ -53,7 +53,14 @@ public class Carrito {
 
 
     // METODOS
-    private ArrayList<String> items = new ArrayList<String>();
+    private ArrayList<String> catalogo = new ArrayList<String>();
+
+    public void inicializarCatalogo(){
+        catalogo.add("Guerra de los mundos");
+        catalogo.add("El pergume");
+        catalogo.add("Nacidos de la bruma");
+    }
+
 
     public Boolean estaVacio() {
         return items.size() == 0;
@@ -65,7 +72,7 @@ public class Carrito {
     }
 
     private void verificarQueElItemSeaValido(String unItem) {
-        if (unItem.equals("INVALIDO")){
+        if (!catalogo.contains(unItem)){
             throw new RuntimeException(mensajeDeErrorCuandoUnLibroNoEsValido());
         }
     }
