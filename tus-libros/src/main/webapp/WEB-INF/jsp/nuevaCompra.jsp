@@ -10,16 +10,29 @@
         <br/>
         <h2>Nueva compra</h2>
         <br/>
-        <form action="/carrito" method="post">
-            <input name="carrito">
+
+        <form action="/carrito_nuevo" method="post" >
+            Crear nuevo carrito
             <input type="submit">
         </form>
+
+        <form action="/agregar_item" method="post" >
+            Agregar un Item al carrito
+            <input name="elemento">
+            <input type="submit">
+        </form>
+
         <br/>
         <h1 id="titulo">Carritos</h1>
+
         <ul>
-            <c:forEach items="${carritos}" var="carrito">
-                <li class="crt">${carrito.getId()}</li>
-            </c:forEach>
+                ${carrito}
+                ---------------------------------------------------------
+                <li class="crt">Carrito id:${carrito.getId()}</li>
+                <br/>
+                <li class="crt">Contenido:${carrito.contenido()}</li>
+                <br/>
+                ---------------------------------------------------------
         </ul>
 
     </body>

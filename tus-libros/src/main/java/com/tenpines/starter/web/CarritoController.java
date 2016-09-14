@@ -9,15 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class CarritoController {
     private ServicioDeCarritos servicio;
+    Carrito carrito = new Carrito();
 
     @Autowired
     public CarritoController(ServicioDeCarritos servicioDeCarritos) {
@@ -26,19 +25,18 @@ public class CarritoController {
 
     @RequestMapping(Endpoints.HOME)
     String home(Model model) {
-        model.addAttribute("carritos", obtener());
+        model.addAttribute("carrito", obtenerUnCarrito());
         return "nuevaCompra";
     }
 
-    @RequestMapping(value = Endpoints.AGREGAR_CARRITO, method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    void agregar(AgregarRequest carrito, HttpServletResponse response) throws IOException {
-        servicio.almacenar(carrito);
+
+    @RequestMapping(value = Endpoints.AGREGAR_CARRITO, method = RequestMethod.POST)
+    void crearUnCarrito(HttpServletResponse response) throws IOException {
         response.sendRedirect(Endpoints.HOME);
+        carrito = new Carrito();
     }
 
-    @RequestMapping(value = Endpoints.OBTENER_CARRITO, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    List<Carrito> obtener(){
-        return (List<Carrito>) servicio.buscarTodos();
-    }
+    private Carrito obtenerUnCarrito(){
+        return carrito;
+     }
 }

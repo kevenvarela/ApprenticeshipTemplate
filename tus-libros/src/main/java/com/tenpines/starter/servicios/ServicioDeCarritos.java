@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 @Service
 public class ServicioDeCarritos {
 
@@ -18,7 +20,7 @@ public class ServicioDeCarritos {
         repo.save(new Carrito(carrito));
     }
 
-    public Iterable<Carrito> buscarTodos() {
-        return repo.findAll();
+    public Carrito buscarElCarrito() {
+        return new Carrito();
     }
 }
