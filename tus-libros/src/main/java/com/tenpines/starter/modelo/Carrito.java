@@ -13,10 +13,9 @@ public class Carrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
 
-    private ArrayList<String> contenido = new ArrayList<String>();
+    //private ArrayList<String> contenido = new ArrayList<String>();
 
     private String cliente;
 
@@ -36,21 +35,21 @@ public class Carrito {
         return id;
     }
 
-    public void setContenido(ArrayList<String> contenido) {
-        this.contenido = contenido;
-    }
+//    public void setContenido(ArrayList<String> contenido) {
+//        this.contenido = contenido;
+//    }
+//
+//    public ArrayList<String> getContenido() {
+//        return contenido;
+//    }
 
-    public ArrayList<String> getContenido() {
-        return contenido;
-    }
+//    public String getCliente() {
+//        return cliente;
+//    }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
+//    public void setCliente(String cliente) {
+//        this.cliente = cliente;
+//    }
 
 
     // METODOS

@@ -10,15 +10,15 @@
         <br/>
         <h2>Nueva compra</h2>
         <br/>
-        <form action="/mensajes" method="post">
-            <input name="mensaje">
+        <form action="/carrito" method="post">
+            <input name="carrito">
             <input type="submit">
         </form>
         <br/>
         <h1 id="titulo">Carritos</h1>
         <ul>
-            <c:forEach items="${mensajes}" var="mensaje">
-                <li class="msj">${mensaje}</li>
+            <c:forEach items="${carritos}" var="carrito">
+                <li class="crt">${carrito.getId()}</li>
             </c:forEach>
         </ul>
 

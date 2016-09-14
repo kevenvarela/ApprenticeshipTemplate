@@ -1,5 +1,6 @@
 package com.tenpines.repositorioPersistencia;
 
+import com.tenpines.starter.modelo.Carrito;
 import com.tenpines.starter.repositorios.RepositorioDeCarritos;
 
 import org.junit.Before;
@@ -18,6 +19,7 @@ public class RepositorioDeCarritosTest {
 
     @Test
     public void test1GuardoUnItemEnElReposositorioYAlSolicitarloObtengoElMismoItem(){
+        Carrito carritoPersistido = new Carrito();
 
     }
 }

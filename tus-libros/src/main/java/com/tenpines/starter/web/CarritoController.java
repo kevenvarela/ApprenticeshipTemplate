@@ -26,7 +26,7 @@ public class CarritoController {
 
     @RequestMapping(Endpoints.HOME)
     String home(Model model) {
-        model.addAttribute("mensajes", obtener());
+        model.addAttribute("carritos", obtener());
         return "nuevaCompra";
     }
 
