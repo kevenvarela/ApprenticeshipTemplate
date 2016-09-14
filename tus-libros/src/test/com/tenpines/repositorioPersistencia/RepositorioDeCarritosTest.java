@@ -1,15 +1,15 @@
 package com.tenpines.repositorioPersistencia;
 
-import com.tenpines.starter.repositorios.Repositorio;
+import com.tenpines.starter.repositorios.RepositorioDeCarritos;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class RepositorioTest {
+public class RepositorioDeCarritosTest {
 
-    private Repositorio repositorio;
+    private RepositorioDeCarritos repositorio;
 
     @Before
     public void setUp() {

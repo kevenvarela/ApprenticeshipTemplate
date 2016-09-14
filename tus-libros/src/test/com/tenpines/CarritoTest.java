@@ -1,7 +1,7 @@
 package com.tenpines;
 
-import com.tenpines.starter.Carrito;
-import com.tenpines.starter.ProvedorDeObjetos;
+import com.tenpines.starter.modelo.Carrito;
+import com.tenpines.starter.modelo.ProvedorDeObjetos;
 import org.junit.Before;
 import org.junit.Test;
 

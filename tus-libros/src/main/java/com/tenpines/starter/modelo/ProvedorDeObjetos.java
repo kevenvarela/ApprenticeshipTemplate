@@ -1,5 +1,7 @@
-package com.tenpines.starter;
+package com.tenpines.starter.modelo;
 
+
+import com.tenpines.starter.modelo.Carrito;
 
 public class ProvedorDeObjetos {
 

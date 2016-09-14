@@ -1,6 +1,6 @@
-package com.tenpines.starter;
+package com.tenpines.starter.modelo;
 
-//import org.assertj.core.api.AbstractBigDecimalAssert;
+import com.tenpines.starter.rest.AgregarRequest;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +21,9 @@ public class Carrito {
     private String cliente;
 
     public Carrito(){
+    }
+
+    public Carrito(AgregarRequest carrito) {
     }
 
     //PERSISTENCIA
