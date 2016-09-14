@@ -17,7 +17,7 @@ public class ServicioDeCarritos {
 
     @Transactional
     public void almacenar(AgregarRequest carrito) {
-        repo.save(new Carrito(carrito));
+
     }
 
     public Carrito buscarElCarrito() {

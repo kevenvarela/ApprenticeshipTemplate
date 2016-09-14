@@ -19,9 +19,6 @@ public class Carrito {
     private String cliente;
 
     public Carrito(){
-    }
-
-    public Carrito(AgregarRequest carrito) {
         this.inicializarCatalogo();
     }
 
