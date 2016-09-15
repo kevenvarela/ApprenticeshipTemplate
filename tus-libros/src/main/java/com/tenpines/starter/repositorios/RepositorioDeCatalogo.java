@@ -1,11 +1,11 @@
 package com.tenpines.starter.repositorios;
 
-import com.tenpines.starter.modelo.Carrito;
 
+import com.tenpines.starter.modelo.Catalogo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface RepositorioDeCarritos extends CrudRepository<Carrito, Integer> {
+public interface RepositorioDeCatalogo extends CrudRepository<Catalogo, Integer> {
 
 }

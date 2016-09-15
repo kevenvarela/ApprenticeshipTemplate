@@ -11,7 +11,7 @@ public class ProvedorDeObjetos {
 
     public Carrito carritoConUnLibro(){
         Carrito unCarrito = new Carrito();
-        unCarrito.agregarItem("Libro 1");
+        unCarrito.agregarLibro("Guerra de los mundos", 1);
         return unCarrito;
     }
 }

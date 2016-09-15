@@ -6,4 +6,6 @@ public class Endpoints {
     public static final String OBTENER_CARRITO = AGREGAR_CARRITO;
     public static final String AGREGAR_ITEM = HOME + "/agregar_item";
     public static final String OBTENER_ITEM = AGREGAR_ITEM;
+    public static final String LOGUEAR_CLIENTE = HOME + "/loguear_Cliente";
+    public static final String OBTENER_CLIENTE = LOGUEAR_CLIENTE;
 }

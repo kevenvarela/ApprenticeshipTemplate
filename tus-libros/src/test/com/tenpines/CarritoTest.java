@@ -17,51 +17,67 @@ public class CarritoTest{
     public void setUp() {
         provedor = new ProvedorDeObjetos();
         carrito = provedor.carritoVacio();
-        carrito.inicializarCatalogo();
     }
 
     @Test
-    public void test001AlCrearUnCarritoDebeEstarVacio(){
+    public void alCrearUnCarritoDebeEstarVacio(){
         assertThat(carrito.estaVacio()).isEqualTo(true);
     }
 
     @Test
-    public void test002AlAgregarleUnItemAUnCarritoDebeContenerloYDejarDeEstarVacio(){
-        carrito.agregarItem("Guerra de los mundos");
+    public void alAgregarleUnItemAUnCarritoDebeContenerloYDejarDeEstarVacio(){
+        carrito.agregarLibro("Guerra de los mundos",1);
         assertThat(carrito.contiene("Guerra de los mundos")).isEqualTo(true);
         assertThat(carrito.estaVacio()).isEqualTo(false);
     }
 
     @Test
-    public void test003AlAgregarleUnItemDebeConterloUnaVez(){
-        carrito.agregarItem("Guerra de los mundos");
+    public void alAgregarleUnItemDebeConterloUnaVez(){
+        carrito.agregarLibro("Guerra de los mundos",1);
         assertThat(carrito.contidadDeUnItem("Guerra de los mundos")).isEqualTo(1);
     }
 
     @Test
-    public void test004AlAgregarUnaCantidadDeItemsLaCantidadTotalDeEllosEsLaMismaCantidad(){
-        carrito.agregarItem("Guerra de los mundos");
-        carrito.agregarItem("Nacidos de la bruma");
+    public void alAgregarUnaCantidadDeItemsLaCantidadTotalDeEllosEsLaMismaCantidad(){
+        carrito.agregarLibro("Guerra de los mundos",1);
+        carrito.agregarLibro("Nacidos de la bruma",1);
         assertThat(carrito.cantidadTotalDeItems()).isEqualTo(2);
     }
 
     @Test
-    public void test005AgregarUnItemUnaCiertaCantidadDeVecesYQueSeHayaAgregadoEsaCantidad(){
-        carrito.agregarItem("Guerra de los mundos");
-        carrito.agregarItem("Guerra de los mundos");
-        carrito.agregarItem("Guerra de los mundos");
-        carrito.agregarItem("Guerra de los mundos");
+    public void agregarUnItemUnaCiertaCantidadDeVecesYQueSeHayaAgregadoEsaCantidad(){
+        carrito.agregarLibro("Guerra de los mundos",4);
         assertThat(carrito.contidadDeUnItem("Guerra de los mundos")).isEqualTo(4);
     }
 
     @Test
-    public void test006AlAgregarUnItemQueNoEsDeEstaEditorialSeDebeLanzarExcepcionYNoDebeSerAgregado(){
+    public void alAgregarUnaCantidadDeVecesUnLibroYOtroLibroAlConsultarMeDevuelveLaCantidadDelConsultado(){
+        carrito.agregarLibro("Guerra de los mundos",4);
+        carrito.agregarLibro("El perfume",2);
+        assertThat(carrito.contidadDeUnItem("Guerra de los mundos")).isEqualTo(4);
+        assertThat(carrito.contidadDeUnItem("El perfume")).isEqualTo(2);
+    }
+
+    @Test
+    public void alAgregarUnItemQueNoEsDeEstaEditorialSeDebeLanzarExcepcionYNoDebeSerAgregado(){
         try {
-            carrito.agregarItem("INVALIDO");
+            carrito.agregarLibro("INVALIDO",1);
             assertTrue("nunca deberia llegar aca", false);
-        } catch (RuntimeException e) {
-            assertThat(e.getMessage()).isEqualTo(Carrito.mensajeDeErrorCuandoUnLibroNoEsValido());
+        } catch (RuntimeException excepcionLibroInvalido) {
+            assertThat(excepcionLibroInvalido.getMessage()).isEqualTo(Carrito.mensajeDeErrorCuandoUnLibroNoEsValido());
         }
     }
+
+    @Test
+    public void noSePuedenAgregarCantidadesNegativasDeUnLibro(){
+        try {
+            carrito.agregarLibro("Guerra de los mundos", -2);
+            assertTrue("nunca deberia llegar aca", false);
+        } catch (RuntimeException excepcionCantidadInvalida) {
+            assertThat(excepcionCantidadInvalida.getMessage()).isEqualTo(Carrito.mensajeDeErrorCuandoAgregoLibrosUnaCantidadNegativa());
+        }
+    }
+
+
 
 }

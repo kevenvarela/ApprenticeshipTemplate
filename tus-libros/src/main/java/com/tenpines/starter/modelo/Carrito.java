@@ -1,25 +1,24 @@
 package com.tenpines.starter.modelo;
 
-import com.tenpines.starter.rest.AgregarRequest;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
 public class Carrito {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @OneToMany
+//    @ManyToOne
+    @Column
     private ArrayList<String> items = new ArrayList<String>();
 
-    private String cliente;
+    @OneToOne
+    private Cliente cliente;
+
 
     public Carrito(){
-        this.inicializarCatalogo();
     }
 
     //PERSISTENCIA
@@ -44,39 +43,57 @@ public class Carrito {
 //        return cliente;
 //    }
 
-//    public void setCliente(String cliente) {
-//        this.cliente = cliente;
-//    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
 
     // METODOS
-    private ArrayList<String> catalogo = new ArrayList<String>();
-
-    public void inicializarCatalogo(){
-        catalogo.add("Guerra de los mundos");
-        catalogo.add("El pergume");
-        catalogo.add("Nacidos de la bruma");
-    }
-
+//    @Column
+//    public ArrayList<String> catalogo = new ArrayList<String>();
+//
+//    public void inicializarCatalogo(){
+//        catalogo.add("Guerra de los mundos");
+//        catalogo.add("El perfume");
+//        catalogo.add("Nacidos de la bruma");
+//    }
+//
+//    public ArrayList<String> catalogo(){
+//        return catalogo;
+//    }
 
     public Boolean estaVacio() {
         return items.size() == 0;
     }
 
-    public void agregarItem(String unItem) {
-        this.verificarQueElItemSeaValido(unItem);
-        items.add(unItem);
+    public void agregarLibro(String unItem, Integer cantidad) {
+//        this.verificarQueElItemSeaValido(unItem);
+        this. verificarQueLaCantidadSeaValida(cantidad);
+        for (int i=0; i<cantidad; i++) {
+            items.add(unItem);
+        }
     }
 
-    private void verificarQueElItemSeaValido(String unItem) {
-        if (!catalogo.contains(unItem)){
-            throw new RuntimeException(mensajeDeErrorCuandoUnLibroNoEsValido());
+//    private void verificarQueElItemSeaValido(String unItem) {
+//        if (!catalogo.contains(unItem)){
+//            throw new RuntimeException(mensajeDeErrorCuandoUnLibroNoEsValido());
+//        }
+//    }
+
+    private void verificarQueLaCantidadSeaValida(Integer cantidad) {
+        if (cantidad <= 0){
+            throw new RuntimeException(mensajeDeErrorCuandoAgregoLibrosUnaCantidadNegativa());
         }
     }
 
     public static String mensajeDeErrorCuandoUnLibroNoEsValido() {
         return "El libro no corresponde a esta editorial";
     }
+
+    public static String mensajeDeErrorCuandoAgregoLibrosUnaCantidadNegativa() {
+        return "La cantidad de libros a agregar debe ser mayor a 0";
+    }
+
 
     public Boolean contiene(String unItem) {
         return items.contains(unItem);
@@ -94,4 +111,5 @@ public class Carrito {
     public ArrayList<String> contenido(){
         return items;
     }
+
 }
