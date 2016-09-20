@@ -1,25 +1,21 @@
-package com.tenpines.starter.api;
+package tenpines.starter.api;
 
-import com.tenpines.starter.integracion.RESTTestBase;
 import com.tenpines.starter.modelo.Carrito;
 import com.tenpines.starter.modelo.Cliente;
-import com.tenpines.starter.modelo.Libro;
 import com.tenpines.starter.servicios.ServicioDeCarritos;
 import com.tenpines.starter.servicios.ServicioDeCliente;
 import com.tenpines.starter.web.Endpoints;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import tenpines.starter.integracion.RESTTestBase;
 
 import java.util.Arrays;
 
-import static com.tenpines.starter.modelo.ProveedorDeObjetos.UN_PRECIO_BIEN_CONOCIDO;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 public class APITest extends RESTTestBase {

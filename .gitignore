@@ -5,6 +5,7 @@ db/
 .idea_modules/
 atlassian-ide-plugin.xml
 
+*.properties
 *.iml
 *.class
 *.jar

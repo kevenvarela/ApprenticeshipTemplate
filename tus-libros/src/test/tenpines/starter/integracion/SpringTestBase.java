@@ -1,4 +1,4 @@
-package com.tenpines.starter.integracion;
+package tenpines.starter.integracion;
 
 
 import org.junit.runner.RunWith;

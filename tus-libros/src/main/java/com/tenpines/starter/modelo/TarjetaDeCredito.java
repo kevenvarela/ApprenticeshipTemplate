@@ -1,6 +1,5 @@
 package com.tenpines.starter.modelo;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class TarjetaDeCredito {

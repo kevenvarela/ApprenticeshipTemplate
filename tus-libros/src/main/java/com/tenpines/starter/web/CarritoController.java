@@ -1,8 +1,8 @@
 package com.tenpines.starter.web;
 
 import com.tenpines.starter.modelo.Carrito;
-import com.tenpines.starter.modelo.Libro;
 import com.tenpines.starter.modelo.Cliente;
+import com.tenpines.starter.modelo.Libro;
 import com.tenpines.starter.servicios.ServicioDeCarritos;
 import com.tenpines.starter.servicios.ServicioDeCatalogo;
 import com.tenpines.starter.servicios.ServicioDeCliente;
@@ -69,7 +69,7 @@ public class CarritoController {
         response.sendRedirect(Endpoints.HOME);
     }
 
-    @RequestMapping(value=Endpoints.OBTENER_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value= Endpoints.OBTENER_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     List<Cliente> obtenerCliente(){
         return servicioDeCliente.mostrarClientes();
@@ -81,7 +81,7 @@ public class CarritoController {
         return carrito;
     }
 
-    @RequestMapping(value=Endpoints.OBTENER_CARRITO, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value= Endpoints.OBTENER_CARRITO, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     List<Carrito> obtenerCarritos(){
         return servicioCarrito.mostrarCarritos();

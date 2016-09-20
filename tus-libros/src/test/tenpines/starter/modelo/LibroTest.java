@@ -1,6 +1,7 @@
-package com.tenpines.starter.modelo;
+package tenpines.starter.modelo;
 
 
+import com.tenpines.starter.modelo.Libro;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

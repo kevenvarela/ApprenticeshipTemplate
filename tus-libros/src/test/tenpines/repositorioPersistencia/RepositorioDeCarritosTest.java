@@ -1,12 +1,9 @@
-package com.tenpines.repositorioPersistencia;
+package tenpines.repositorioPersistencia;
 
 import com.tenpines.starter.modelo.Carrito;
 import com.tenpines.starter.repositorios.RepositorioDeCarritos;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class RepositorioDeCarritosTest {
 

@@ -1,5 +1,7 @@
-package com.tenpines.starter.modelo;
+package tenpines.starter.modelo;
 
+import com.tenpines.starter.modelo.Carrito;
+import com.tenpines.starter.modelo.Libro;
 import org.junit.Before;
 import org.junit.Test;
 

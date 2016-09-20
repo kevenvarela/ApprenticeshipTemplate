@@ -1,16 +1,15 @@
-package com.tenpines.starter.modelo;
+package tenpines.starter.modelo;
 
 
 import com.tenpines.starter.modelo.Cajero;
 import com.tenpines.starter.modelo.Carrito;
+import com.tenpines.starter.modelo.Cliente;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.beans.PropertyVetoException;
-
-import static com.tenpines.starter.modelo.ProveedorDeObjetos.UN_PRECIO_BIEN_CONOCIDO;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
+import static tenpines.starter.modelo.ProveedorDeObjetos.UN_PRECIO_BIEN_CONOCIDO;
 
 public class CajeroTest {
 

@@ -1,6 +1,6 @@
-package com.tenpines.starter.web;
+package tenpines.starter.web;
 
-import com.tenpines.starter.integracion.SpringTestBase;
+
 import com.tenpines.starter.modelo.Carrito;
 import com.tenpines.starter.modelo.Cliente;
 import com.tenpines.starter.modelo.Libro;
@@ -9,6 +9,7 @@ import com.tenpines.starter.servicios.ServicioDeCliente;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import tenpines.starter.integracion.SpringTestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;

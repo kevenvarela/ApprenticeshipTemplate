@@ -1,4 +1,4 @@
-package com.tenpines.starter.modelo;
+package tenpines.starter.modelo;
 
 /**
  * Created by Aye on 20/09/16.
