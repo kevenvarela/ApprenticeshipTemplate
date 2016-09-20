@@ -1,5 +1,7 @@
 package com.tenpines.starter.modelo;
 
-
-public class Libro {
+/**
+ * Created by Kevin on 20/09/16.
+ */
+public class Catalogo {
 }
