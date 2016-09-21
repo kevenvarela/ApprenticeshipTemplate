@@ -5,6 +5,7 @@ import com.tenpines.starter.modelo.Carrito;
 import com.tenpines.starter.modelo.Cliente;
 import com.tenpines.starter.modelo.Libro;
 import com.tenpines.starter.servicios.ServicioDeCarritos;
+import com.tenpines.starter.servicios.ServicioDeCatalogo;
 import com.tenpines.starter.servicios.ServicioDeCliente;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Test;
@@ -23,6 +24,9 @@ public class ServiciosTest extends SpringTestBase {
 
     @Autowired
     private ServicioDeCliente servicioDeCliente;
+
+    @Autowired
+    private ServicioDeCatalogo servicioDeCatalogo;
 
     @Test
     public void hayCarritoCreado(){
@@ -54,6 +58,8 @@ public class ServiciosTest extends SpringTestBase {
         Carrito carrito1 = Carrito.crearCarrito(cliente1);
         Libro libro1 = Libro.crearLibro("El perfume", "123456789", 45);
 
+        servicioDeCliente.almacenar(cliente1);
+        servicioDeCatalogo.guardarEnCatalogo(libro1);
         servicioDeCarritos.agregarLibro(carrito1, libro1, 1);
         assertThat(servicioDeCarritos.mostrarContenidoDeUnCarrito(carrito1.getId())).contains(libro1);
     }

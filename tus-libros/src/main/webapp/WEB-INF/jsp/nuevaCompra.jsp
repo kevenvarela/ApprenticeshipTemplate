@@ -17,15 +17,17 @@
     <input type="submit">
 </form>
 
-<form action="/agregar_item" method="post" >
+<form action="/addToCart" method="post" >
     Seleccione libro a agregar: <select name="libro">
     <option disabled selected value> -- Seleccione un libro -- </option>
     <c:forEach items="${libros}" var="libro">
-        <option value="${libro}">${libro.getNombreLibro()}</option>
+        <option value=${libro.getId()}>${libro.getNombreLibro()}</option>
     </c:forEach>
 </select>
     <br><br>
     <input type="submit">
+    Cantidad
+    <input name="cantidad">
 </form>
 
 
@@ -37,16 +39,15 @@
 </form>
 
 <br/>
-<h1 id="titulo">Carritos</h1>
+<h1 id_catalogo="titulo">Carritos</h1>
 
 <ul>
 
     ---------------------------------------------------------
     <li class="clt">Cliente:${cliente.getId()}</li>
     <br/>
-    <li class="crt">Carrito id:${carrito.getId()}</li>
+    <li class="crt">Carrito id_catalogo:${carrito.getId()}</li>
     <br/>
-    <li class="crt">Contenido:${carrito.contenido()}</li>
     <br/>
     ---------------------------------------------------------
 </ul>

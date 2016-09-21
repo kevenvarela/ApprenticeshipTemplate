@@ -1,11 +1,12 @@
 package com.tenpines.starter.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Carrito{
+public class Carrito implements Serializable, Cloneable{
 
 
     @Id
@@ -13,7 +14,7 @@ public class Carrito{
     private Long id;
 
     @OneToMany
-    private List<Libro> items = new ArrayList<Libro>();
+    private List<Libro> items;
 
     @OneToOne
     private Cliente cliente;
@@ -25,6 +26,7 @@ public class Carrito{
     public static Carrito crearCarrito(Cliente unCliente){
         Carrito carrito = new Carrito();
         carrito.setCliente(unCliente);
+        carrito.setItems(new ArrayList<Libro>());
         return carrito;
     }
     //PERSISTENCIA
@@ -37,7 +39,7 @@ public class Carrito{
         return id;
     }
 
-    public void setItems(ArrayList<Libro> unItem) {
+    public void setItems(List<Libro> unItem) {
         this.items = unItem;
     }
 
@@ -65,7 +67,7 @@ public class Carrito{
     }
 
     public void agregarLibro(Libro unLibro, Integer cantidad) {
-        this.verificarQueLaCantidadSeaValida(cantidad);
+        this. verificarQueLaCantidadSeaValida(cantidad);
         for (int i=0; i<cantidad; i++) {
             items.add(unLibro);
         }
@@ -103,6 +105,8 @@ public class Carrito{
     public Long tuClienteId() {
 
         return cliente.getId();
+
+
     }
 
     public static Libro catalogo() {

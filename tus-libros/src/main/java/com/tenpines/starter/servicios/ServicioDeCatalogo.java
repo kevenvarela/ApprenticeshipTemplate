@@ -18,7 +18,7 @@ public class ServicioDeCatalogo {
         return repo.findOne(id);
     }
 
-    public void guardarCatalogo(Libro libro) {
+    public void guardarEnCatalogo(Libro libro) {
         repo.save(libro);
     }
 
