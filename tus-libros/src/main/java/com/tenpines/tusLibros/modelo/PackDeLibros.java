@@ -1,7 +1,6 @@
 package com.tenpines.tusLibros.modelo;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class PackDeLibros {
@@ -18,7 +17,7 @@ public class PackDeLibros {
 
 
     @ManyToOne
-    public Carrito carito;
+    public Carrito carrito;
 
     public PackDeLibros(){
     }
@@ -56,11 +55,11 @@ public class PackDeLibros {
     }
 
     public Carrito getCarrito() {
-        return carito;
+        return carrito;
     }
 
     public void setCarrito(Carrito carito) {
-        this.carito = carito;
+        this.carrito = carito;
     }
 
     @Override
