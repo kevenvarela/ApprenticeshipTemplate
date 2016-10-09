@@ -32,6 +32,21 @@ define('tlfrontend/components/app-version', ['exports', 'ember-cli-app-version/c
     name: name
   });
 });
+define('tlfrontend/controllers/home', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Controller.extend({});
+});
+define("tlfrontend/controllers/home/login", ["exports", "ember"], function (exports, _ember) {
+  exports["default"] = _ember["default"].Controller.extend({
+    actions: {
+      loguearCliente: function loguearCliente() {
+        var usuario = this.get("usuario");
+        var password = this.get("password");
+        alert(usuario);
+      }
+    }
+
+  });
+});
 define('tlfrontend/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
   exports['default'] = _emberInflectorLibHelpersPluralize['default'];
 });
@@ -216,7 +231,11 @@ define('tlfrontend/router', ['exports', 'ember', 'tlfrontend/config/environment'
   exports['default'] = Router;
 });
 define('tlfrontend/routes/home', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({});
+  exports['default'] = _ember['default'].Route.extend({
+    redirect: function redirect() {
+      this.transitionTo('/news');
+    }
+  });
 });
 define('tlfrontend/routes/home/catalogo', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({});
@@ -380,12 +399,9 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
         dom.setAttribute(el4, "class", "form-group");
-        var el5 = dom.createTextNode("\n                ");
+        var el5 = dom.createTextNode("\n              ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5, "type", "text");
-        dom.setAttribute(el5, "placeholder", "Email");
-        dom.setAttribute(el5, "class", "form-control");
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
@@ -394,12 +410,9 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
         dom.setAttribute(el4, "class", "form-group");
-        var el5 = dom.createTextNode("\n                ");
+        var el5 = dom.createTextNode("\n              ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5, "type", "password");
-        dom.setAttribute(el5, "placeholder", "Password");
-        dom.setAttribute(el5, "class", "form-control");
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
@@ -513,15 +526,20 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0, 1]);
-        var element1 = dom.childAt(element0, [5, 1]);
-        var morphs = new Array(4);
-        morphs[0] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 0, 0);
-        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
-        morphs[2] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(fragment, [2, 1, 1]), 1, 1);
+        var element1 = dom.childAt(element0, [1]);
+        var element2 = dom.childAt(element1, [5]);
+        var element3 = dom.childAt(element0, [5, 1]);
+        var morphs = new Array(7);
+        morphs[0] = dom.createMorphAt(dom.childAt(element1, [1]), 1, 1);
+        morphs[1] = dom.createMorphAt(dom.childAt(element1, [3]), 1, 1);
+        morphs[2] = dom.createElementMorph(element2);
+        morphs[3] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
+        morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 0, 0);
+        morphs[6] = dom.createMorphAt(dom.childAt(fragment, [2, 1, 1]), 1, 1);
         return morphs;
       },
-      statements: [["block", "link-to", ["home.news"], [], 0, null, ["loc", [null, [13, 36], [13, 99]]]], ["block", "link-to", ["home.login"], [], 1, null, ["loc", [null, [17, 20], [17, 62]]]], ["block", "link-to", ["home.catalogo"], [], 2, null, ["loc", [null, [18, 20], [18, 68]]]], ["content", "outlet", ["loc", [null, [27, 6], [27, 16]]], 0, 0, 0, 0]],
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [5, 61], [5, 68]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [5, 14], [5, 92]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [8, 65], [8, 73]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 14], [8, 98]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [10, 20], [10, 47]]], 0, 0], ["block", "link-to", ["home.news"], [], 0, null, ["loc", [null, [13, 36], [13, 99]]]], ["block", "link-to", ["home.login"], [], 1, null, ["loc", [null, [17, 20], [17, 62]]]], ["block", "link-to", ["home.catalogo"], [], 2, null, ["loc", [null, [18, 20], [18, 68]]]], ["content", "outlet", ["loc", [null, [27, 6], [27, 16]]], 0, 0, 0, 0]],
       locals: [],
       templates: [child0, child1, child2]
     };
@@ -887,7 +905,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 20,
+            "line": 24,
             "column": 0
           }
         },
@@ -899,76 +917,55 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("hr");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "container");
-        var el2 = dom.createTextNode("\n\n    ");
+        var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("form");
-        dom.setAttribute(el2, "class", "form-signin");
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h2");
-        dom.setAttribute(el3, "class", "form-signin-heading");
-        var el4 = dom.createTextNode("Identificarse");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("label");
-        dom.setAttribute(el3, "for", "inputEmail");
-        dom.setAttribute(el3, "class", "sr-only");
-        var el4 = dom.createTextNode("Email address");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("input");
-        dom.setAttribute(el3, "type", "text");
-        dom.setAttribute(el3, "id", "inputUsuario");
-        dom.setAttribute(el3, "class", "form-control");
-        dom.setAttribute(el3, "placeholder", "Usuario");
-        dom.setAttribute(el3, "required", "");
-        dom.setAttribute(el3, "autofocus", "");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("label");
-        dom.setAttribute(el3, "for", "inputPassword");
-        dom.setAttribute(el3, "class", "sr-only");
-        var el4 = dom.createTextNode("Password");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("input");
-        dom.setAttribute(el3, "type", "password");
-        dom.setAttribute(el3, "id", "inputPassword");
-        dom.setAttribute(el3, "class", "form-control");
-        dom.setAttribute(el3, "placeholder", "Password");
-        dom.setAttribute(el3, "required", "");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
+        var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "checkbox");
-        var el4 = dom.createTextNode("\n            ");
+        dom.setAttribute(el3, "class", "form-signin");
+        var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("label");
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5, "type", "checkbox");
-        dom.setAttribute(el5, "value", "remember-me");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode(" Remember me\n            ");
+        var el4 = dom.createElement("h2");
+        dom.setAttribute(el4, "class", "form-signin-heading");
+        var el5 = dom.createTextNode("Identificarse");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
+        var el4 = dom.createElement("label");
+        var el5 = dom.createTextNode("Usuario");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "form-signin");
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("label");
+        var el5 = dom.createTextNode("Password");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n      ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("hr");
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
@@ -978,7 +975,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         var el4 = dom.createTextNode("Ingresar");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
+        var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -988,14 +985,20 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createComment(" /container ");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n\n");
+        var el1 = dom.createTextNode("\n\n\n\n\n\n\n\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0, 1]);
+        var element1 = dom.childAt(element0, [7]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]), 5, 5);
+        morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 3, 3);
+        morphs[2] = dom.createElementMorph(element1);
+        return morphs;
       },
-      statements: [],
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [6, 55], [6, 62]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 8], [6, 86]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [10, 59], [10, 67]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [10, 8], [10, 92]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [13, 16], [13, 43]]], 0, 0]],
       locals: [],
       templates: []
     };
@@ -1295,7 +1298,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+6ea357c7"});
+  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+14e0f002"});
 }
 
 /* jshint ignore:end */

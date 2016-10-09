@@ -9,6 +9,24 @@ define('tlfrontend/tests/app.jshint', ['exports'], function (exports) {
     assert.ok(true, 'app.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/controllers/home.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/home.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/home.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/controllers/home/login.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/home/login.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'controllers/home/login.js should pass jshint.\ncontrollers/home/login.js: line 6, col 40, Missing semicolon.\ncontrollers/home/login.js: line 7, col 42, Missing semicolon.\ncontrollers/home/login.js: line 8, col 21, Missing semicolon.\ncontrollers/home/login.js: line 7, col 11, \'password\' is defined but never used.\n\n4 errors');
+  });
+});
 define('tlfrontend/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -172,6 +190,50 @@ define('tlfrontend/tests/test-helper.jshint', ['exports'], function (exports) {
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/controllers/home-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:home', 'Unit | Controller | home', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('tlfrontend/tests/unit/controllers/home-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/home-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/home-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/controllers/home/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:home/login', 'Unit | Controller | home/login', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('tlfrontend/tests/unit/controllers/home/login-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/home/login-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/home/login-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/routes/home-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
