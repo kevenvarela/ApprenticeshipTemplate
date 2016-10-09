@@ -17,3 +17,4 @@ public class StarterMainRunner extends SpringBootServletInitializer {
         SpringApplication.run(StarterMainRunner.class, args);
     }
 }
+
