@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('login');
     this.route('news');
   });
+  this.route('cobrar');
 });
 
 export default Router;

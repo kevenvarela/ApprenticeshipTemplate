@@ -35,6 +35,9 @@ define('tlfrontend/components/app-version', ['exports', 'ember-cli-app-version/c
 define('tlfrontend/controllers/home', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({});
 });
+define('tlfrontend/controllers/home/catalogo', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Controller.extend({});
+});
 define("tlfrontend/controllers/home/login", ["exports", "ember"], function (exports, _ember) {
   exports["default"] = _ember["default"].Controller.extend({
     actions: {
@@ -44,7 +47,6 @@ define("tlfrontend/controllers/home/login", ["exports", "ember"], function (expo
         alert(usuario);
       }
     }
-
   });
 });
 define('tlfrontend/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
@@ -131,6 +133,18 @@ define('tlfrontend/initializers/export-application-global', ['exports', 'ember',
   function initialize() {
     var application = arguments[1] || arguments[0];
     if (_tlfrontendConfigEnvironment['default'].exportApplicationGlobal !== false) {
+      var theGlobal;
+      if (typeof window !== 'undefined') {
+        theGlobal = window;
+      } else if (typeof global !== 'undefined') {
+        theGlobal = global;
+      } else if (typeof self !== 'undefined') {
+        theGlobal = self;
+      } else {
+        // no reasonable global, just bail
+        return;
+      }
+
       var value = _tlfrontendConfigEnvironment['default'].exportApplicationGlobal;
       var globalName;
 
@@ -140,13 +154,13 @@ define('tlfrontend/initializers/export-application-global', ['exports', 'ember',
         globalName = _ember['default'].String.classify(_tlfrontendConfigEnvironment['default'].modulePrefix);
       }
 
-      if (!window[globalName]) {
-        window[globalName] = application;
+      if (!theGlobal[globalName]) {
+        theGlobal[globalName] = application;
 
         application.reopen({
           willDestroy: function willDestroy() {
             this._super.apply(this, arguments);
-            delete window[globalName];
+            delete theGlobal[globalName];
           }
         });
       }
@@ -210,6 +224,32 @@ define("tlfrontend/instance-initializers/ember-data", ["exports", "ember-data/-p
     initialize: _emberDataPrivateInstanceInitializersInitializeStoreService["default"]
   };
 });
+define('tlfrontend/models/cajero', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({});
+});
+define('tlfrontend/models/carrito', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({});
+});
+define('tlfrontend/models/catalogo', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    titulo: _emberData['default'].attr('string'),
+    isbn: _emberData['default'].attr('string'),
+    precio: _emberData['default'].attr('string')
+  });
+});
+define('tlfrontend/models/cliente', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    usuario: _emberData['default'].attr('string'),
+    password: _emberData['default'].attr('string')
+  });
+});
+define('tlfrontend/models/libro', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    nombre: _emberData['default'].attr('string'),
+    isbn: _emberData['default'].attr('string'),
+    precio: _emberData['default'].attr('integer')
+  });
+});
 define('tlfrontend/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
   exports['default'] = _emberResolver['default'];
 });
@@ -226,9 +266,13 @@ define('tlfrontend/router', ['exports', 'ember', 'tlfrontend/config/environment'
       this.route('login');
       this.route('news');
     });
+    this.route('cobrar');
   });
 
   exports['default'] = Router;
+});
+define('tlfrontend/routes/cobrar', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({});
 });
 define('tlfrontend/routes/home', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
@@ -237,8 +281,12 @@ define('tlfrontend/routes/home', ['exports', 'ember'], function (exports, _ember
     }
   });
 });
-define('tlfrontend/routes/home/catalogo', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({});
+define("tlfrontend/routes/home/catalogo", ["exports", "ember"], function (exports, _ember) {
+  exports["default"] = _ember["default"].Route.extend({
+    model: function model() {
+      return [{ id: 1, titulo: "El principito", isbn: "12345", precio: "$50", cantidad: 46 }, { id: 2, titulo: "Nacidos de la bruma", isbn: "54321", precio: "$70", cantidad: 100 }];
+    }
+  });
 });
 define('tlfrontend/routes/home/login', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({});
@@ -253,6 +301,48 @@ define('tlfrontend/services/ajax', ['exports', 'ember-ajax/services/ajax'], func
       return _emberAjaxServicesAjax['default'];
     }
   });
+});
+define("tlfrontend/templates/cobrar", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "revision": "Ember@2.8.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 0
+          }
+        },
+        "moduleName": "tlfrontend/templates/cobrar.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        return morphs;
+      },
+      statements: [["content", "outlet", ["loc", [null, [1, 0], [1, 10]]], 0, 0, 0, 0]],
+      locals: [],
+      templates: []
+    };
+  })());
 });
 define("tlfrontend/templates/home", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
@@ -547,6 +637,120 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
 });
 define("tlfrontend/templates/home/catalogo", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "revision": "Ember@2.8.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 19,
+              "column": 14
+            },
+            "end": {
+              "line": 30,
+              "column": 14
+            }
+          },
+          "moduleName": "tlfrontend/templates/home/catalogo.hbs"
+        },
+        isEmpty: false,
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("            ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("tr");
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createElement("button");
+          dom.setAttribute(el3, "type", "submit");
+          dom.setAttribute(el3, "class", "btn btn-success");
+          var el4 = dom.createTextNode("+1");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n                    ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("button");
+          dom.setAttribute(el3, "type", "submit");
+          dom.setAttribute(el3, "class", "btn btn-danger");
+          var el4 = dom.createTextNode("-1");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n                ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createElement("h4");
+          var el4 = dom.createElement("span");
+          dom.setAttribute(el4, "class", "label label-info");
+          var el5 = dom.createTextNode("0");
+          dom.appendChild(el4, el5);
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n                ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createElement("h4");
+          var el4 = dom.createElement("form");
+          dom.setAttribute(el4, "class", "label label-info");
+          var el5 = dom.createComment("");
+          dom.appendChild(el4, el5);
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var element1 = dom.childAt(element0, [7]);
+          var element2 = dom.childAt(element1, [0]);
+          var element3 = dom.childAt(element1, [2]);
+          var element4 = dom.childAt(element0, [11, 0, 0]);
+          var morphs = new Array(7);
+          morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
+          morphs[2] = dom.createMorphAt(dom.childAt(element0, [5]), 0, 0);
+          morphs[3] = dom.createElementMorph(element2);
+          morphs[4] = dom.createElementMorph(element3);
+          morphs[5] = dom.createAttrMorph(element4, 'id');
+          morphs[6] = dom.createMorphAt(element4, 0, 0);
+          return morphs;
+        },
+        statements: [["content", "catalogo.titulo", ["loc", [null, [21, 20], [21, 39]]], 0, 0, 0, 0], ["content", "catalogo.isbn", ["loc", [null, [22, 20], [22, 37]]], 0, 0, 0, 0], ["content", "catalogo.precio", ["loc", [null, [23, 20], [23, 39]]], 0, 0, 0, 0], ["element", "action", ["sumarUnItem"], [], ["loc", [null, [24, 28], [24, 52]]], 0, 0], ["element", "action", ["restarUnItem"], [], ["loc", [null, [25, 28], [25, 53]]], 0, 0], ["attribute", "id", ["concat", [["get", "catalogo.cantidad", ["loc", [null, [28, 36], [28, 53]]], 0, 0, 0, 0]], 0, 0, 0, 0, 0], 0, 0, 0, 0], ["content", "catalogo.cantidad", ["loc", [null, [28, 82], [28, 103]]], 0, 0, 0, 0]],
+        locals: ["catalogo"],
+        templates: []
+      };
+    })();
     return {
       meta: {
         "revision": "Ember@2.8.2",
@@ -557,7 +761,7 @@ define("tlfrontend/templates/home/catalogo", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 56,
+            "line": 39,
             "column": 0
           }
         },
@@ -597,52 +801,46 @@ define("tlfrontend/templates/home/catalogo", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("thead");
-        var el4 = dom.createTextNode("\n        ");
+        var el4 = dom.createTextNode("\n            ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("tr");
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
-        var el6 = dom.createTextNode("#");
+        var el6 = dom.createTextNode("Titulo");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("th");
-        var el6 = dom.createTextNode("Libro");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
         var el6 = dom.createTextNode("Isbn");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
         var el6 = dom.createTextNode("Precio");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
         var el6 = dom.createTextNode("Agregar/Quitar");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
         var el6 = dom.createTextNode("Cantidad");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
+        var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("th");
-        var el6 = dom.createTextNode("Disponible");
+        var el6 = dom.createTextNode("Disponibilidad");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n        ");
@@ -651,217 +849,11 @@ define("tlfrontend/templates/home/catalogo", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("tbody");
-        var el4 = dom.createTextNode("\n        ");
+        var el4 = dom.createTextNode("\n");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("tr");
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("1");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("El Principito");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("12344321");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("$45");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-success");
-        var el7 = dom.createTextNode("Agregar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-danger");
-        var el7 = dom.createTextNode("Quitar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("0");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("3");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
+        var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("tr");
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("2");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("Guerra de los mundos");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("12344321");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("$70");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-success");
-        var el7 = dom.createTextNode("Agregar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-danger");
-        var el7 = dom.createTextNode("Quitar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("0");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("5");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("tr");
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("3");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("Nacidos de la bruma");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("12344321");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createTextNode("$105");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-success");
-        var el7 = dom.createTextNode("Agregar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("button");
-        dom.setAttribute(el6, "type", "button");
-        dom.setAttribute(el6, "class", "btn btn-sm btn-danger");
-        var el7 = dom.createTextNode("Quitar");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("0");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("td");
-        var el6 = dom.createElement("h4");
-        var el7 = dom.createElement("span");
-        dom.setAttribute(el7, "class", "label label-info");
-        var el8 = dom.createTextNode("7");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
+        var el4 = dom.createTextNode("        ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -880,16 +872,18 @@ define("tlfrontend/templates/home/catalogo", ["exports"], function (exports) {
         dom.setAttribute(el1, "required", "");
         dom.setAttribute(el1, "autofocus", "");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2, 7, 3]), 1, 1);
+        return morphs;
       },
-      statements: [],
+      statements: [["block", "each", [["get", "model", ["loc", [null, [19, 22], [19, 27]]], 0, 0, 0, 0]], [], 0, null, ["loc", [null, [19, 14], [30, 23]]]]],
       locals: [],
-      templates: []
+      templates: [child0]
     };
   })());
 });
@@ -905,7 +899,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 24,
+            "line": 22,
             "column": 0
           }
         },
@@ -925,7 +919,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "form-signin");
+        dom.setAttribute(el3, "class", "form-signin col-md-6 ");
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("h2");
@@ -943,13 +937,6 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "form-signin");
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("label");
@@ -960,19 +947,19 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
+        var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n      ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("hr");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("button");
-        dom.setAttribute(el3, "class", "btn btn-lg btn-primary btn-block");
-        dom.setAttribute(el3, "type", "submit");
-        var el4 = dom.createTextNode("Ingresar");
+        var el4 = dom.createElement("hr");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("button");
+        dom.setAttribute(el4, "class", "btn btn-lg btn-primary btn-block");
+        dom.setAttribute(el4, "type", "submit");
+        var el5 = dom.createTextNode("Ingresar");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -990,15 +977,15 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0, 1]);
-        var element1 = dom.childAt(element0, [7]);
+        var element0 = dom.childAt(fragment, [0, 1, 1]);
+        var element1 = dom.childAt(element0, [13]);
         var morphs = new Array(3);
-        morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]), 5, 5);
-        morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 3, 3);
+        morphs[0] = dom.createMorphAt(element0, 5, 5);
+        morphs[1] = dom.createMorphAt(element0, 9, 9);
         morphs[2] = dom.createElementMorph(element1);
         return morphs;
       },
-      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [6, 55], [6, 62]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 8], [6, 86]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [10, 59], [10, 67]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [10, 8], [10, 92]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [13, 16], [13, 43]]], 0, 0]],
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [6, 56], [6, 63]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 8], [6, 87]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "minlength", "6", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [8, 73], [8, 81]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 8], [8, 106]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [10, 16], [10, 43]]], 0, 0]],
       locals: [],
       templates: []
     };
@@ -1298,7 +1285,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+14e0f002"});
+  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+bb79af78"});
 }
 
 /* jshint ignore:end */

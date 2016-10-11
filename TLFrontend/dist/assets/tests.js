@@ -18,6 +18,15 @@ define('tlfrontend/tests/controllers/home.jshint', ['exports'], function (export
     assert.ok(true, 'controllers/home.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/controllers/home/catalogo.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/home/catalogo.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/home/catalogo.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/controllers/home/login.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -125,6 +134,51 @@ define('tlfrontend/tests/helpers/start-app.jshint', ['exports'], function (expor
     assert.ok(true, 'helpers/start-app.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/models/cajero.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | models/cajero.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/cajero.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/models/carrito.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | models/carrito.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/carrito.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/models/catalogo.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | models/catalogo.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/catalogo.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/models/cliente.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | models/cliente.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/cliente.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/models/libro.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | models/libro.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/libro.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/resolver.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -143,6 +197,15 @@ define('tlfrontend/tests/router.jshint', ['exports'], function (exports) {
     assert.ok(true, 'router.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/routes/cobrar.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/cobrar.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/cobrar.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/routes/home.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -158,7 +221,7 @@ define('tlfrontend/tests/routes/home/catalogo.jshint', ['exports'], function (ex
   QUnit.module('JSHint | routes/home/catalogo.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/home/catalogo.js should pass jshint.');
+    assert.ok(false, 'routes/home/catalogo.js should pass jshint.\nroutes/home/catalogo.js: line 6, col 90, Missing semicolon.\n\n1 error');
   });
 });
 define('tlfrontend/tests/routes/home/login.jshint', ['exports'], function (exports) {
@@ -214,6 +277,28 @@ define('tlfrontend/tests/unit/controllers/home-test.jshint', ['exports'], functi
     assert.ok(true, 'unit/controllers/home-test.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/unit/controllers/home/catalogo-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:home/catalogo', 'Unit | Controller | home/catalogo', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('tlfrontend/tests/unit/controllers/home/catalogo-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/home/catalogo-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/home/catalogo-test.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/unit/controllers/home/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
 
   (0, _emberQunit.moduleFor)('controller:home/login', 'Unit | Controller | home/login', {
@@ -234,6 +319,137 @@ define('tlfrontend/tests/unit/controllers/home/login-test.jshint', ['exports'], 
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/controllers/home/login-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/models/cajero-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('cajero', 'Unit | Model | cajero', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('tlfrontend/tests/unit/models/cajero-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/models/cajero-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/cajero-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/models/carrito-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('carrito', 'Unit | Model | carrito', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('tlfrontend/tests/unit/models/carrito-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/models/carrito-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/carrito-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/models/catalogo-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('catalogo', 'Unit | Model | catalogo', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('tlfrontend/tests/unit/models/catalogo-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/models/catalogo-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/catalogo-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/models/cliente-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('cliente', 'Unit | Model | cliente', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('tlfrontend/tests/unit/models/cliente-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/models/cliente-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/cliente-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/models/libro-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('libro', 'Unit | Model | libro', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('tlfrontend/tests/unit/models/libro-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/models/libro-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/libro-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/routes/cobrar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:cobrar', 'Unit | Route | cobrar', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('tlfrontend/tests/unit/routes/cobrar-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/routes/cobrar-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/cobrar-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/routes/home-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
