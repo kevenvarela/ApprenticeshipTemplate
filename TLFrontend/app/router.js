@@ -11,9 +11,10 @@ Router.map(function() {
     this.route('catalogo');
     this.route('login');
     this.route('news');
+    this.route('libro');
   });
   this.route('cobrar');
-  this.route('libro');
+
 });
 
 export default Router;
