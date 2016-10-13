@@ -45,6 +45,15 @@ define('tlfrontend/tests/controllers/home/login.jshint', ['exports'], function (
     assert.ok(true, 'controllers/home/login.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/controllers/nuevo-libro.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/nuevo-libro.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/nuevo-libro.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -251,6 +260,15 @@ define('tlfrontend/tests/routes/home/news.jshint', ['exports'], function (export
     assert.ok(true, 'routes/home/news.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/routes/nuevo-libro.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/nuevo-libro.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/nuevo-libro.js should pass jshint.');
+  });
+});
 define('tlfrontend/tests/serializers/application.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -381,6 +399,28 @@ define('tlfrontend/tests/unit/controllers/home/login-test.jshint', ['exports'], 
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/controllers/home/login-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/controllers/nuevo-libro-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:nuevo-libro', 'Unit | Controller | nuevo libro', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('tlfrontend/tests/unit/controllers/nuevo-libro-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/nuevo-libro-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/nuevo-libro-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/models/cajero-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -617,6 +657,27 @@ define('tlfrontend/tests/unit/routes/libro-test.jshint', ['exports'], function (
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/libro-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/routes/nuevo-libro-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:nuevo-libro', 'Unit | Route | nuevo libro', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('tlfrontend/tests/unit/routes/nuevo-libro-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/routes/nuevo-libro-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/nuevo-libro-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/serializers/application-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {

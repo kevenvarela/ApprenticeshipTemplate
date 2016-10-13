@@ -1,0 +1,19 @@
+<div class="container">
+    <form>
+        <div class="form-signin col-md-5 col-lg-offset-3">
+            <h2 class="form-signin-heading">Cargar nuevo libro</h2>
+            <label>Titulo</label>
+          {{input type="text" class="form-control" id="nomberLibro" value=model.nombreLibro placeholder="Titutlo"}}
+            <label>ISBN</label>
+          {{input type="text" class="form-control" id="isbn" minlength="11" value=model.isbn placeholder="ISBN"}}
+            <label>Precio</label>
+          {{input type="number" class="form-control" id="precio" value=model.precio placeholder="Precio"}}
+            <hr>
+            <button {{action 'crearLibro'}} class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
+            <hr>
+            <button class="btn btn-lg btn-primary btn-danger col-md-12" type="reset">Reset</button>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+

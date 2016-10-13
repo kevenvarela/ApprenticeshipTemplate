@@ -13,6 +13,8 @@ define('tlfrontend/router', ['exports', 'ember', 'tlfrontend/config/environment'
       this.route('libro');
     });
     this.route('cobrar');
+
+    this.route('nuevoLibro');
   });
 
   exports['default'] = Router;

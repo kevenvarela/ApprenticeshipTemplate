@@ -15,6 +15,7 @@ Router.map(function() {
   });
   this.route('cobrar');
 
+  this.route('nuevoLibro');
 });
 
 export default Router;

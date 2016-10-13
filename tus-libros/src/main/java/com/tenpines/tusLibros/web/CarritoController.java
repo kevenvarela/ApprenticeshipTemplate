@@ -63,7 +63,7 @@ public class CarritoController extends GlobalExceptionHandlingController{
         SesionConClienteTO sesionConClienteTO = SesionConClienteTO.crearSesionConCliente(sesion.getId_sesion(),unCliente.getId(),sesion.getCarrito().getId());
         return sesionConClienteTO;
     }
-    //TODO /carts/:cart_id/books (POST) PARA AGREGAR ITEM AL CARRITO :cart_id
+////    TODO /carts/:cart_id/books (POST) PARA AGREGAR ITEM AL CARRITO :cart_id
 //    @RequestMapping(value = Endpoints.AGREGAR_ITEM, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    void agregarUnLibro(@RequestParam Map<String,String> requestParams, HttpServletResponse response) throws IOException {
 //        Long idLibro = Long.valueOf(requestParams.get("libro"));
@@ -89,18 +89,14 @@ public class CarritoController extends GlobalExceptionHandlingController{
 //        unCliente = servicioDeCliente.clienteLogueado(idUsuario, password);
 //        return unCliente;
 //    }
-
-    @RequestMapping(value=Endpoints.LIBROS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value=Endpoints.LIBROS, method= RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    List<Libro> catalogoHARDCODE(){
-        List<Libro> libro = new ArrayList<Libro>();
-        Libro libro1 = Libro.crearLibro("kevin","12345",45);
-        libro1.setId(1L);
-        Libro libro2 = Libro.crearLibro("nicolas","54321",70);
-        libro2.setId(2L);
-        libro.add(libro1);
-        libro.add(libro2);
-        return libro ;
+    List<Libro> obtenerLibros(){ return servicioCatalogo.mostrarCatalogo();}
+
+    @RequestMapping(value=Endpoints.LIBROS, method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    Libro crearLibro(@RequestBody Libro libro){
+        return servicioCatalogo.agregarLibroAlCatalogo(libro.getNombreLibro(),libro.getIsbn(),libro.getPrecio());
     }
 
     @RequestMapping(value=Endpoints.OBTENER_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

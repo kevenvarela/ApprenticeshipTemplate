@@ -30,7 +30,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "form-signin col-md-3 col-lg-3 ");
+        dom.setAttribute(el3, "class", "form-signin col-md-5 col-md-offset-3 ");
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("h2");
