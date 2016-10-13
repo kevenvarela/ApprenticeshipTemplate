@@ -16,11 +16,11 @@
             </tr>
         </thead>
         <tbody>
-              {{#each model as |catalogo|}}
+              {{#each model as |libro|}}
             <tr>
-                <td>{{catalogo.titulo}}</td>
-                <td>{{catalogo.isbn}}</td>
-                <td>{{catalogo.precio}}</td>
+                <td>{{libro.titulo}}</td>
+                <td>{{libro.isbn}}</td>
+                <td>{{libro.precio}}</td>
                 <td><button {{action 'sumarUnItem'}} type="submit" class="btn btn-success">+1</button>
                     <button {{action 'restarUnItem'}} type="submit" class="btn btn-danger">-1</button>
                 </td>

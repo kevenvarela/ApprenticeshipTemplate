@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('news');
   });
   this.route('cobrar');
+  this.route('libro');
 });
 
 export default Router;

@@ -7,6 +7,8 @@ import com.tenpines.tusLibros.servicios.ServicioDeSesion;
 import com.tenpines.tusLibros.web.TransferObjects.SesionConClienteTO;
 import com.tenpines.tusLibros.web.TransferObjects.UsuarioPasswordTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonJsonParser;
+import org.springframework.boot.json.JsonSimpleJsonParser;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +54,8 @@ public class CarritoController extends GlobalExceptionHandlingController{
         return "cobrarCarrito";
     }
 
-
-    @RequestMapping(value = Endpoints.AGREGAR_CARRITO, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    //TODO: /CARRITO (POST)   ES PARA CREAR CARRITO
+    @RequestMapping(value = Endpoints.CARRITOS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     SesionConClienteTO crearUnCarrito(@RequestBody UsuarioPasswordTO usuarioPasswordTO, HttpServletResponse response) throws IOException {
         Cliente unCliente = servicioDeCliente.buscarElCliente(usuarioPasswordTO.getIdUsuario());
@@ -61,7 +63,7 @@ public class CarritoController extends GlobalExceptionHandlingController{
         SesionConClienteTO sesionConClienteTO = SesionConClienteTO.crearSesionConCliente(sesion.getId_sesion(),unCliente.getId(),sesion.getCarrito().getId());
         return sesionConClienteTO;
     }
-
+    //TODO /carts/:cart_id/books (POST) PARA AGREGAR ITEM AL CARRITO :cart_id
 //    @RequestMapping(value = Endpoints.AGREGAR_ITEM, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    void agregarUnLibro(@RequestParam Map<String,String> requestParams, HttpServletResponse response) throws IOException {
 //        Long idLibro = Long.valueOf(requestParams.get("libro"));
@@ -71,20 +73,34 @@ public class CarritoController extends GlobalExceptionHandlingController{
 //        response.sendRedirect("/listCart?" + "carrito=" + sesion.getCarrito().getId()); //TODO VER COMO SE HACE PARA USAR EL ENDPOINT Y PASARLE UN PARAMETRO
 //    }
 
+    //TODO /carts/:cart_id/books (GET)
     @RequestMapping(value=Endpoints.MOSTRAR_ITEMS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     Set<PackDeLibros> obtenerLibro(@RequestParam(value = "carrito") Carrito unCarrito){
         return servicioDeSesion.mostrarLibrosDeCarrito(unCarrito.getId());
     }
 
-    @RequestMapping(value = Endpoints.LOGUEAR_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    private Cliente loguearCliente(@RequestParam Map<String,String> requestParams , HttpServletResponse response) throws IOException {
-        Long idUsuario = Long.valueOf(requestParams.get("nombre"));
-        String password = requestParams.get("password");
+//    @RequestMapping(value = Endpoints.LOGUEAR_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    @ResponseBody
+//    private Cliente loguearCliente(@RequestParam Map<String,String> requestParams , HttpServletResponse response) throws IOException {
+//        Long idUsuario = Long.valueOf(requestParams.get("nombre"));
+//        String password = requestParams.get("password");
+//
+//        unCliente = servicioDeCliente.clienteLogueado(idUsuario, password);
+//        return unCliente;
+//    }
 
-        unCliente = servicioDeCliente.clienteLogueado(idUsuario, password);
-        return unCliente;
+    @RequestMapping(value=Endpoints.LIBROS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    List<Libro> catalogoHARDCODE(){
+        List<Libro> libro = new ArrayList<Libro>();
+        Libro libro1 = Libro.crearLibro("kevin","12345",45);
+        libro1.setId(1L);
+        Libro libro2 = Libro.crearLibro("nicolas","54321",70);
+        libro2.setId(2L);
+        libro.add(libro1);
+        libro.add(libro2);
+        return libro ;
     }
 
     @RequestMapping(value=Endpoints.OBTENER_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

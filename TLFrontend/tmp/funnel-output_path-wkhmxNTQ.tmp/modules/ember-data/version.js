@@ -1,0 +1,1 @@
+/home/pino/Escritorio/tusLibros/ApprenticeshipTemplate/TLFrontend/tmp/creator-output_path-XAY9aK5g.tmp/version.js

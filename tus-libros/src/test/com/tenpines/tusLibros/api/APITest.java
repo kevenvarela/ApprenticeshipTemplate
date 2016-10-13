@@ -5,30 +5,22 @@ import com.tenpines.tusLibros.modelo.Carrito;
 import com.tenpines.tusLibros.modelo.Cliente;
 import com.tenpines.tusLibros.modelo.Sesion;
 import com.tenpines.tusLibros.repositorios.RepositorioDeCarritos;
-import com.tenpines.tusLibros.repositorios.RepositorioDeCatalogo;
 import com.tenpines.tusLibros.repositorios.RepositorioDeClientes;
 import com.tenpines.tusLibros.repositorios.RepositorioDeSesiones;
-import com.tenpines.tusLibros.servicios.ServicioDeCarritos;
 import com.tenpines.tusLibros.servicios.ServicioDeCliente;
 import com.tenpines.tusLibros.servicios.ServicioDeSesion;
 import com.tenpines.tusLibros.web.Endpoints;
 import com.tenpines.tusLibros.web.TransferObjects.UsuarioPasswordTO;
 
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.NotNull;
-import org.mockito.internal.matchers.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.cache.support.NullValue;
 
 
 import java.util.Arrays;
 
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -132,7 +124,7 @@ public class APITest extends RESTTestBase {
     @Test
     public void creoUnCarritoIniciandoLaSesionConUnUsuarioConContraseniaInvalido() throws Exception {
         UsuarioPasswordTO usuarioPasswordTO = UsuarioPasswordTO.crearUsuarioPasswordTO(cliente.getId(), "EstaNoEsLaContrasenia");
-        this.mockClient.perform(post(Endpoints.AGREGAR_CARRITO).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
+        this.mockClient.perform(post(Endpoints.CARRITOS).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
                 .andExpect(content().contentType(JSON_CONTENT_TYPE))
                 .andExpect(status().isBadRequest());
     }
@@ -143,7 +135,7 @@ public class APITest extends RESTTestBase {
         UsuarioPasswordTO usuarioPasswordTO = UsuarioPasswordTO.crearUsuarioPasswordTO(cliente.getId(), cliente.getPassword());
         Mockito.when(servicioDeCliente.buscarElCliente(usuarioPasswordTO.getIdUsuario())).thenReturn(cliente);
         Mockito.when(servicioDeSesion.crearCarrito(cliente)).thenReturn(unaSesion);
-        this.mockClient.perform(post(Endpoints.AGREGAR_CARRITO).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
+        this.mockClient.perform(post(Endpoints.CARRITOS).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
                 .andExpect(content().contentType(JSON_CONTENT_TYPE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(notNullValue()));
