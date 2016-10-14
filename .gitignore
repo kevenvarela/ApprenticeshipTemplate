@@ -1,4 +1,6 @@
 target/
+tmp/
+bower_components/
 .idea/
 /out/
 db/
