@@ -1,1 +1,0 @@
-/home/pino/Escritorio/tusLibros/ApprenticeshipTemplate/TLFrontend/app/app.js
