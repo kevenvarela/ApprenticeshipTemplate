@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Libro implements Serializable, Cloneable{
 
     public static Libro crearLibro(String nombreLibro, String isbn, Integer precio){
+        verificaQueTengaTodosLosAtributos(nombreLibro, isbn, precio);
         Libro libro = new Libro();
         libro.setNombreLibro(nombreLibro);
         libro.setIsbn(isbn);
@@ -53,6 +54,16 @@ public class Libro implements Serializable, Cloneable{
     public Integer getPrecio(){ return this.precio;}
 
     public void setPrecio(Integer precio){ this.precio = precio;}
+
+    private static void verificaQueTengaTodosLosAtributos(String nombreLibro, String isbn, Integer precio) {
+        if (nombreLibro == null || isbn == null || precio == null){
+            throw new RuntimeException(mensajeDeErrorCuandoQuieroCrearUnLibroInvalido());
+        }
+    }
+
+    public static String mensajeDeErrorCuandoQuieroCrearUnLibroInvalido(){
+        return "El libro que intenta agregar es invalido";
+    }
 
     @Override
     public boolean equals(Object objeto){

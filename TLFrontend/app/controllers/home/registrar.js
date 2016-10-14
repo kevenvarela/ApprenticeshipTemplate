@@ -2,10 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    loguearCliente(){
+    registrarCliente(){
       this.get('model').save();
+      debugger;
     }
   }
 });
-
-

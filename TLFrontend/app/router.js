@@ -8,13 +8,12 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('home', { path: '/' }, function() {
-    this.route('catalogo');
     this.route('login');
     this.route('news');
     this.route('libro');
+    this.route('registrar');
   });
   this.route('cobrar');
-
   this.route('nuevoLibro');
 });
 

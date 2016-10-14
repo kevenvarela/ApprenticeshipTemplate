@@ -50,6 +50,16 @@ define('tlfrontend/controllers/home/login', ['exports', 'ember'], function (expo
     }
   });
 });
+define('tlfrontend/controllers/home/registrar', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Controller.extend({
+    actions: {
+      registrarCliente: function registrarCliente() {
+        this.get('model').save();
+        debugger;
+      }
+    }
+  });
+});
 define('tlfrontend/controllers/nuevo-libro', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({
     actions: {
@@ -143,18 +153,6 @@ define('tlfrontend/initializers/export-application-global', ['exports', 'ember',
   function initialize() {
     var application = arguments[1] || arguments[0];
     if (_tlfrontendConfigEnvironment['default'].exportApplicationGlobal !== false) {
-      var theGlobal;
-      if (typeof window !== 'undefined') {
-        theGlobal = window;
-      } else if (typeof global !== 'undefined') {
-        theGlobal = global;
-      } else if (typeof self !== 'undefined') {
-        theGlobal = self;
-      } else {
-        // no reasonable global, just bail
-        return;
-      }
-
       var value = _tlfrontendConfigEnvironment['default'].exportApplicationGlobal;
       var globalName;
 
@@ -164,13 +162,13 @@ define('tlfrontend/initializers/export-application-global', ['exports', 'ember',
         globalName = _ember['default'].String.classify(_tlfrontendConfigEnvironment['default'].modulePrefix);
       }
 
-      if (!theGlobal[globalName]) {
-        theGlobal[globalName] = application;
+      if (!window[globalName]) {
+        window[globalName] = application;
 
         application.reopen({
           willDestroy: function willDestroy() {
             this._super.apply(this, arguments);
-            delete theGlobal[globalName];
+            delete window[globalName];
           }
         });
       }
@@ -240,16 +238,8 @@ define('tlfrontend/models/cajero', ['exports', 'ember-data'], function (exports,
 define('tlfrontend/models/carrito', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].Model.extend({});
 });
-define('tlfrontend/models/catalogo', ['exports', 'ember-data'], function (exports, _emberData) {
-  exports['default'] = _emberData['default'].Model.extend({
-    titulo: _emberData['default'].attr('string'),
-    isbn: _emberData['default'].attr('string'),
-    precio: _emberData['default'].attr('string')
-  });
-});
 define('tlfrontend/models/cliente', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].Model.extend({
-    usuario: _emberData['default'].attr('string'),
     password: _emberData['default'].attr('string')
   });
 });
@@ -276,13 +266,12 @@ define('tlfrontend/router', ['exports', 'ember', 'tlfrontend/config/environment'
 
   Router.map(function () {
     this.route('home', { path: '/' }, function () {
-      this.route('catalogo');
       this.route('login');
       this.route('news');
       this.route('libro');
+      this.route('registrar');
     });
     this.route('cobrar');
-
     this.route('nuevoLibro');
   });
 
@@ -311,10 +300,21 @@ define('tlfrontend/routes/home/libro', ['exports', 'ember'], function (exports, 
   // return $.getJSON('/libros')   // JQUERY
 });
 define('tlfrontend/routes/home/login', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({});
+  exports['default'] = _ember['default'].Route.extend({
+    model: function model() {
+      return this.get('store').createRecord('cliente');
+    }
+  });
 });
 define('tlfrontend/routes/home/news', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({});
+});
+define('tlfrontend/routes/home/registrar', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({
+    model: function model() {
+      return this.get('store').createRecord('cliente');
+    }
+  });
 });
 define('tlfrontend/routes/nuevo-libro', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
@@ -389,11 +389,11 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 13,
+              "line": 15,
               "column": 36
             },
             "end": {
-              "line": 13,
+              "line": 15,
               "column": 87
             }
           },
@@ -426,12 +426,12 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 19,
               "column": 20
             },
             "end": {
-              "line": 17,
-              "column": 50
+              "line": 19,
+              "column": 60
             }
           },
           "moduleName": "tlfrontend/templates/home.hbs"
@@ -442,7 +442,7 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("Login");
+          var el1 = dom.createTextNode("Registrarse");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -461,11 +461,46 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 18,
+              "line": 20,
               "column": 20
             },
             "end": {
-              "line": 18,
+              "line": 20,
+              "column": 53
+            }
+          },
+          "moduleName": "tlfrontend/templates/home.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("Ingresar");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child3 = (function () {
+      return {
+        meta: {
+          "revision": "Ember@2.8.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 21,
+              "column": 20
+            },
+            "end": {
+              "line": 21,
               "column": 53
             }
           },
@@ -499,7 +534,7 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 35,
+            "line": 38,
             "column": 0
           }
         },
@@ -517,6 +552,10 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
         dom.setAttribute(el2, "class", "container");
+        var el3 = dom.createTextNode("\n            ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("login barra");
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("form");
@@ -554,6 +593,10 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n          ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("login barra");
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
@@ -577,6 +620,12 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "nav navbar-nav");
+        var el5 = dom.createTextNode("\n                ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -652,22 +701,23 @@ define("tlfrontend/templates/home", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0, 1]);
-        var element1 = dom.childAt(element0, [1]);
+        var element1 = dom.childAt(element0, [3]);
         var element2 = dom.childAt(element1, [5]);
-        var element3 = dom.childAt(element0, [5, 1]);
-        var morphs = new Array(7);
+        var element3 = dom.childAt(element0, [9, 1]);
+        var morphs = new Array(8);
         morphs[0] = dom.createMorphAt(dom.childAt(element1, [1]), 1, 1);
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [3]), 1, 1);
         morphs[2] = dom.createElementMorph(element2);
-        morphs[3] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 0, 0);
+        morphs[3] = dom.createMorphAt(dom.childAt(element0, [7, 1]), 0, 0);
         morphs[4] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
         morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 0, 0);
-        morphs[6] = dom.createMorphAt(dom.childAt(fragment, [2, 1, 1]), 1, 1);
+        morphs[6] = dom.createMorphAt(dom.childAt(element3, [5]), 0, 0);
+        morphs[7] = dom.createMorphAt(dom.childAt(fragment, [2, 1, 1]), 1, 1);
         return morphs;
       },
-      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [5, 61], [5, 68]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [5, 14], [5, 92]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [8, 65], [8, 73]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 14], [8, 98]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [10, 20], [10, 47]]], 0, 0], ["block", "link-to", ["home.news"], [], 0, null, ["loc", [null, [13, 36], [13, 99]]]], ["block", "link-to", ["home.login"], [], 1, null, ["loc", [null, [17, 20], [17, 62]]]], ["block", "link-to", ["home.libro"], [], 2, null, ["loc", [null, [18, 20], [18, 65]]]], ["content", "outlet", ["loc", [null, [27, 6], [27, 16]]], 0, 0, 0, 0]],
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [6, 61], [6, 68]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 14], [6, 92]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [9, 65], [9, 73]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [9, 14], [9, 98]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [11, 20], [11, 47]]], 0, 0], ["block", "link-to", ["home.news"], [], 0, null, ["loc", [null, [15, 36], [15, 99]]]], ["block", "link-to", ["home.registrar"], [], 1, null, ["loc", [null, [19, 20], [19, 72]]]], ["block", "link-to", ["home.login"], [], 2, null, ["loc", [null, [20, 20], [20, 65]]]], ["block", "link-to", ["home.libro"], [], 3, null, ["loc", [null, [21, 20], [21, 65]]]], ["content", "outlet", ["loc", [null, [30, 6], [30, 16]]], 0, 0, 0, 0]],
       locals: [],
-      templates: [child0, child1, child2]
+      templates: [child0, child1, child2, child3]
     };
   })());
 });
@@ -985,7 +1035,7 @@ define("tlfrontend/templates/home/login", ["exports"], function (exports) {
         morphs[2] = dom.createElementMorph(element1);
         return morphs;
       },
-      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "value", ["subexpr", "@mut", [["get", "usuario", ["loc", [null, [6, 56], [6, 63]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 8], [6, 87]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "minlength", "6", "value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [8, 73], [8, 81]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 8], [8, 106]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [10, 16], [10, 43]]], 0, 0]],
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "id", "id", "value", ["subexpr", "@mut", [["get", "cliente.usuario", ["loc", [null, [6, 63], [6, 78]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Usuario"], ["loc", [null, [6, 8], [6, 102]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "minlength", "6", "id", "password", "value", ["subexpr", "@mut", [["get", "cliente.password", ["loc", [null, [8, 87], [8, 103]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 8], [8, 128]]], 0, 0], ["element", "action", ["loguearCliente"], [], ["loc", [null, [10, 16], [10, 43]]], 0, 0]],
       locals: [],
       templates: []
     };
@@ -1249,6 +1299,121 @@ define("tlfrontend/templates/home/news", ["exports"], function (exports) {
     };
   })());
 });
+define("tlfrontend/templates/home/registrar", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "revision": "Ember@2.8.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 16,
+            "column": 0
+          }
+        },
+        "moduleName": "tlfrontend/templates/home/registrar.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "container");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("form");
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "form-signin col-md-5 col-md-offset-3 ");
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("h2");
+        dom.setAttribute(el4, "class", "form-signin-heading");
+        var el5 = dom.createTextNode("Registrarse");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("label");
+        var el5 = dom.createTextNode("Usuario");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n          ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("label");
+        var el5 = dom.createTextNode("Password");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n          ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("label");
+        var el5 = dom.createTextNode("Repetir password");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n          ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("hr");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("button");
+        dom.setAttribute(el4, "class", "btn btn-lg btn-primary btn-block");
+        dom.setAttribute(el4, "type", "submit");
+        var el5 = dom.createTextNode("Listo");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode(" ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" /container ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0, 1, 1]);
+        var element1 = dom.childAt(element0, [17]);
+        var morphs = new Array(4);
+        morphs[0] = dom.createMorphAt(element0, 5, 5);
+        morphs[1] = dom.createMorphAt(element0, 9, 9);
+        morphs[2] = dom.createMorphAt(element0, 13, 13);
+        morphs[3] = dom.createElementMorph(element1);
+        return morphs;
+      },
+      statements: [["inline", "input", [], ["type", "text", "class", "form-control", "placeholder", "Usuario"], ["loc", [null, [6, 10], [6, 75]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "id", "password", "value", ["subexpr", "@mut", [["get", "cliente.password", ["loc", [null, [8, 75], [8, 91]]], 0, 0, 0, 0]], [], [], 0, 0], "placeholder", "Password"], ["loc", [null, [8, 10], [8, 116]]], 0, 0], ["inline", "input", [], ["type", "password", "class", "form-control", "placeholder", "Password"], ["loc", [null, [10, 10], [10, 79]]], 0, 0], ["element", "action", ["registrarCliente"], [], ["loc", [null, [12, 20], [12, 49]]], 0, 0]],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 define("tlfrontend/templates/nuevo-libro", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -1412,7 +1577,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+21b46dd2"});
+  require("tlfrontend/app")["default"].create({"name":"tlfrontend","version":"0.0.0+444f88e5"});
 }
 
 /* jshint ignore:end */

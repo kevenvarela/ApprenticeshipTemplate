@@ -7,8 +7,6 @@ import com.tenpines.tusLibros.servicios.ServicioDeSesion;
 import com.tenpines.tusLibros.web.TransferObjects.SesionConClienteTO;
 import com.tenpines.tusLibros.web.TransferObjects.UsuarioPasswordTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonJsonParser;
-import org.springframework.boot.json.JsonSimpleJsonParser;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -58,7 +55,7 @@ public class CarritoController extends GlobalExceptionHandlingController{
     @RequestMapping(value = Endpoints.CARRITOS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     SesionConClienteTO crearUnCarrito(@RequestBody UsuarioPasswordTO usuarioPasswordTO, HttpServletResponse response) throws IOException {
-        Cliente unCliente = servicioDeCliente.buscarElCliente(usuarioPasswordTO.getIdUsuario());
+        Cliente unCliente = servicioDeCliente.buscarElCliente(usuarioPasswordTO.getId());
         Sesion sesion = servicioDeSesion.crearCarrito(unCliente);
         SesionConClienteTO sesionConClienteTO = SesionConClienteTO.crearSesionConCliente(sesion.getId_sesion(),unCliente.getId(),sesion.getCarrito().getId());
         return sesionConClienteTO;
@@ -83,12 +80,13 @@ public class CarritoController extends GlobalExceptionHandlingController{
 //    @RequestMapping(value = Endpoints.LOGUEAR_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseBody
 //    private Cliente loguearCliente(@RequestParam Map<String,String> requestParams , HttpServletResponse response) throws IOException {
-//        Long idUsuario = Long.valueOf(requestParams.get("nombre"));
+//        Long id = Long.valueOf(requestParams.get("nombre"));
 //        String password = requestParams.get("password");
 //
-//        unCliente = servicioDeCliente.clienteLogueado(idUsuario, password);
+//        unCliente = servicioDeCliente.clienteLogueado(id, password);
 //        return unCliente;
 //    }
+
     @RequestMapping(value=Endpoints.LIBROS, method= RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     List<Libro> obtenerLibros(){ return servicioCatalogo.mostrarCatalogo();}
@@ -97,6 +95,12 @@ public class CarritoController extends GlobalExceptionHandlingController{
     @ResponseBody
     Libro crearLibro(@RequestBody Libro libro){
         return servicioCatalogo.agregarLibroAlCatalogo(libro.getNombreLibro(),libro.getIsbn(),libro.getPrecio());
+    }
+
+    @RequestMapping(value=Endpoints.CLIENTES, method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    Cliente registrarCliente(@RequestBody Cliente cliente){
+        return servicioDeCliente.guardarCliente(cliente);
     }
 
     @RequestMapping(value=Endpoints.OBTENER_CLIENTE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -108,7 +112,7 @@ public class CarritoController extends GlobalExceptionHandlingController{
     @RequestMapping(value=Endpoints.LISTAR_VENTAS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     List<VentaConcretada> obtenerVentasParaUnCliente(@RequestBody UsuarioPasswordTO usuarioPasswordTO){
-        Cliente cliente = getCliente(usuarioPasswordTO.getIdUsuario());
+        Cliente cliente = getCliente(usuarioPasswordTO.getId());
         return servicioDeSesion.mostrarVentasParaUnCliente(cliente, usuarioPasswordTO.getPassword());
     }
 

@@ -126,6 +126,16 @@ public class TestIntegracion extends SpringTestBase {
         assertThat((servicioDeSesion.mostrarLibrosDeCarrito(sesion.getId_sesion())).contains(libro2));
         assertThat((servicioDeSesion.mostrarLibrosDeCarrito(sesion.getId_sesion()).size())).isEqualTo(5);
     }
+
+    @Test
+    public void alQuererAgregarUnLibroInvalidoAlCatalogoNoLoDebeAgregar() throws Exception {
+
+        try {servicioDeCatalogo.agregarLibroAlCatalogo(null, "123456789", 45);
+        } catch (RuntimeException excepcionCuandoElLibroEsInvalido) {
+            assertThat(excepcionCuandoElLibroEsInvalido.getMessage()).isEqualTo(Libro.mensajeDeErrorCuandoQuieroCrearUnLibroInvalido());
+        }
+    }
+
 //    @Test
 //    public void cobrarUnCarritoCon1Itemy1Unidad(){
 //        carrito.agregarLibro(proveedor.crearLibro(),1);

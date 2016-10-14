@@ -3,9 +3,9 @@
     <div class="form-signin col-md-5 col-md-offset-3 ">
         <h2 class="form-signin-heading">Identificarse</h2>
         <label>Usuario</label>
-        {{input type="text" class="form-control"  value=usuario placeholder="Usuario"}}
+        {{input type="text" class="form-control" id="id" value=cliente.usuario placeholder="Usuario"}}
         <label>Password</label>
-        {{input type="password" class="form-control" minlength="6" value=password placeholder="Password"}}
+        {{input type="password" class="form-control" minlength="6" id="password" value=cliente.password placeholder="Password"}}
       <hr>
         <button {{action 'loguearCliente'}} class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
     </div>

@@ -16,8 +16,8 @@ public class ServicioDeCliente {
     private RepositorioDeClientes repo;
 
     @Transactional
-    public void guardarCliente(Cliente cliente) {
-        repo.save(cliente);
+    public Cliente guardarCliente(Cliente cliente) {
+       return repo.save(cliente);
     }
 
     public Cliente buscarElCliente(Long id) {return repo.findOne(id);}

@@ -8,18 +8,18 @@ public class Cliente{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_cliente;
+    private Long id;
 
     @Column
     public String password;
 
     //PERSISTENCIA
     private void setId(Long unId) {
-        this.id_cliente = unId;
+        this.id = unId;
     }
 
     public Long getId() {
-        return id_cliente;
+        return id;
     }
 
     private void setPassword(String pass){this.password = pass;}

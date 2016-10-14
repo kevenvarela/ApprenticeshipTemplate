@@ -1,0 +1,15 @@
+<div class="container">
+    <form>
+        <div class="form-signin col-md-5 col-md-offset-3 ">
+            <h2 class="form-signin-heading">Registrarse</h2>
+            <label>Usuario</label>
+          {{input type="text" class="form-control"  placeholder="Usuario"}}
+            <label>Password</label>
+          {{input type="password" class="form-control" id="password" value=cliente.password placeholder="Password"}}
+            <label>Repetir password</label>
+          {{input type="password" class="form-control" placeholder="Password"}}
+            <hr>
+            <button {{action 'registrarCliente'}} class="btn btn-lg btn-primary btn-block" type="submit">Listo</button>
+        </div>
+    </form>
+</div> <!-- /container -->

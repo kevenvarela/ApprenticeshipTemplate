@@ -45,6 +45,15 @@ define('tlfrontend/tests/controllers/home/login.jshint', ['exports'], function (
     assert.ok(true, 'controllers/home/login.js should pass jshint.');
   });
 });
+define('tlfrontend/tests/controllers/home/registrar.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/home/registrar.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'controllers/home/registrar.js should pass jshint.\ncontrollers/home/registrar.js: line 7, col 7, Forgotten \'debugger\' statement?\n\n1 error');
+  });
+});
 define('tlfrontend/tests/controllers/nuevo-libro.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -170,15 +179,6 @@ define('tlfrontend/tests/models/carrito.jshint', ['exports'], function (exports)
     assert.ok(true, 'models/carrito.js should pass jshint.');
   });
 });
-define('tlfrontend/tests/models/catalogo.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint | models/catalogo.js');
-  QUnit.test('should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'models/catalogo.js should pass jshint.');
-  });
-});
 define('tlfrontend/tests/models/cliente.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -258,6 +258,15 @@ define('tlfrontend/tests/routes/home/news.jshint', ['exports'], function (export
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/home/news.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/routes/home/registrar.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/home/registrar.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/home/registrar.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/routes/nuevo-libro.jshint', ['exports'], function (exports) {
@@ -421,6 +430,28 @@ define('tlfrontend/tests/unit/controllers/nuevo-libro-test.jshint', ['exports'],
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/controllers/nuevo-libro-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/controllers/registrar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:registrar', 'Unit | Controller | registrar', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('tlfrontend/tests/unit/controllers/registrar-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/registrar-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/registrar-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/models/cajero-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -678,6 +709,27 @@ define('tlfrontend/tests/unit/routes/nuevo-libro-test.jshint', ['exports'], func
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/nuevo-libro-test.js should pass jshint.');
+  });
+});
+define('tlfrontend/tests/unit/routes/registrar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:registrar', 'Unit | Route | registrar', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('tlfrontend/tests/unit/routes/registrar-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/routes/registrar-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/registrar-test.js should pass jshint.');
   });
 });
 define('tlfrontend/tests/unit/serializers/application-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
