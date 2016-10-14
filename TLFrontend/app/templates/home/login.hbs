@@ -3,15 +3,16 @@
     <div class="form-signin col-md-5 col-md-offset-3 ">
         <h2 class="form-signin-heading">Identificarse</h2>
         <label>Usuario</label>
-        {{input type="text" class="form-control" id="id" value=cliente.usuario placeholder="Usuario"}}
+        {{input type="text" class="form-control" id="id" value=model.usuario placeholder="Usuario"}}
         <label>Password</label>
-        {{input type="password" class="form-control" minlength="6" id="password" value=cliente.password placeholder="Password"}}
+        {{input type="password" class="form-control" minlength="6" id="password" value=model.password placeholder="Password"}}
       <hr>
         <button {{action 'loguearCliente'}} class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+       <h1></h1>
+      {{#link-to 'home.registrar'}}Registrarse{{/link-to}}
     </div>
   </form>
 </div> <!-- /container -->
-
 
 
 

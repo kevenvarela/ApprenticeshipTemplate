@@ -100,9 +100,9 @@ public class ServicioDeSesion {
 
 
 //      Lo comento porque sé que en algún momento sirvió.
-//    private Sesion buscarSesionParaElCliente(Long id) {
+//    private Sesion buscarSesionParaElCliente(Long usuario) {
 //        try {
-//            List<Sesion> sesion = repositorio.getSesionParaCliente(id, em);
+//            List<Sesion> sesion = repositorio.getSesionParaCliente(usuario, em);
 //            return sesion.get(sesion.size()-1);}
 //        catch (RuntimeException NoHaySesionParaElUsuarioIngresado) {
 //

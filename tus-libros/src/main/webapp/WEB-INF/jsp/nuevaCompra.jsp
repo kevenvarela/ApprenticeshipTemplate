@@ -46,7 +46,7 @@
                 ---------------------------------------------------------
                 <li class="clt">Cliente:${cliente.getId()}</li>
                 <br/>
-                <li class="crt">Carrito id:${carrito.getId()}</li>
+                <li class="crt">Carrito usuario:${carrito.getId()}</li>
                 <br/>
                 <li class="crt">ContenidoActual:<c:forEach items="${carrito.getItems()}" var="item">
                     <td>${item.getNombreLibro()}</td>

@@ -1,0 +1,1 @@
+/home/pino/Escritorio/tusLibros/ApprenticeshipTemplate/TLFrontend/tmp/broccoli_merge_trees-input_base_path-IlQeeIsY.tmp/3/initializers/ember-data.js

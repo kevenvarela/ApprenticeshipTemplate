@@ -4,7 +4,6 @@ export default Ember.Controller.extend({
   actions: {
     registrarCliente(){
       this.get('model').save();
-      debugger;
     }
   }
 });

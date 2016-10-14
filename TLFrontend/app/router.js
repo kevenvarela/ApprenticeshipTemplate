@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('news');
     this.route('libro');
     this.route('registrar');
+    this.route('carrito');
   });
   this.route('cobrar');
   this.route('nuevoLibro');

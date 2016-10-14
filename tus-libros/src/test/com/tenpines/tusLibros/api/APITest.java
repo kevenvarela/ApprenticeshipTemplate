@@ -113,7 +113,7 @@ public class APITest extends RESTTestBase {
     @Test
     public void listarVentasParaUnClienteQueNoTieneVentas() throws Exception {
         UsuarioPasswordTO usuarioPasswordTO = UsuarioPasswordTO.crearUsuarioPasswordTO(cliente.getId(), cliente.getPassword());
-        Mockito.when(servicioDeCliente.buscarElCliente(usuarioPasswordTO.getId())).thenReturn(cliente);
+        Mockito.when(servicioDeCliente.buscarElCliente(usuarioPasswordTO.getUsuario())).thenReturn(cliente);
         Mockito.when(servicioDeSesion.crearCarrito(cliente)).thenReturn(unaSesion);
         this.mockClient.perform(post(Endpoints.LISTAR_VENTAS).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
                 .andExpect(content().contentType(JSON_CONTENT_TYPE))
@@ -124,7 +124,7 @@ public class APITest extends RESTTestBase {
     @Test
     public void creoUnCarritoIniciandoLaSesionConUnUsuarioConContraseniaInvalido() throws Exception {
         UsuarioPasswordTO usuarioPasswordTO = UsuarioPasswordTO.crearUsuarioPasswordTO(cliente.getId(), "EstaNoEsLaContrasenia");
-        this.mockClient.perform(post(Endpoints.CARRITOS).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
+        this.mockClient.perform(post(Endpoints.CARRITO).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
                 .andExpect(content().contentType(JSON_CONTENT_TYPE))
                 .andExpect(status().isBadRequest());
     }
@@ -133,9 +133,9 @@ public class APITest extends RESTTestBase {
     public void creoUnCarritoIniciandoLaSesionConUnUsuarioConContraseniaValida() throws Exception {
 
         UsuarioPasswordTO usuarioPasswordTO = UsuarioPasswordTO.crearUsuarioPasswordTO(cliente.getId(), cliente.getPassword());
-        Mockito.when(servicioDeCliente.buscarElCliente(usuarioPasswordTO.getId())).thenReturn(cliente);
+        Mockito.when(servicioDeCliente.buscarElCliente(usuarioPasswordTO.getUsuario())).thenReturn(cliente);
         Mockito.when(servicioDeSesion.crearCarrito(cliente)).thenReturn(unaSesion);
-        this.mockClient.perform(post(Endpoints.CARRITOS).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
+        this.mockClient.perform(post(Endpoints.CARRITO).contentType(APPLICATION_JSON_UTF8_VALUE).content(json(usuarioPasswordTO)))
                 .andExpect(content().contentType(JSON_CONTENT_TYPE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(notNullValue()));

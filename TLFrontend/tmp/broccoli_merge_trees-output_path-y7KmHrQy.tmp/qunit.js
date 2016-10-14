@@ -1,0 +1,1 @@
+/home/pino/Escritorio/tusLibros/ApprenticeshipTemplate/TLFrontend/node_modules/ember-cli-qunit/node_modules/ember-qunit/lib/qunit.js

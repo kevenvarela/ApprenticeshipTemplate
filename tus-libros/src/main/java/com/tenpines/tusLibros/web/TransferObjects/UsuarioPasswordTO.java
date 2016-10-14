@@ -5,19 +5,19 @@ package com.tenpines.tusLibros.web.TransferObjects;
  */
 public class UsuarioPasswordTO {
 
-    public Long id;
+    public Long usuario;
     public String password;
 
-    public Long getId() {
-        return id;
+    public Long getUsuario() {
+        return usuario;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuario(Long usuario) {
+        this.usuario = usuario;
     }
 
     public void setPassword(String password) {
@@ -29,7 +29,7 @@ public class UsuarioPasswordTO {
 
     public static UsuarioPasswordTO crearUsuarioPasswordTO(Long idUsuario, String password){
         UsuarioPasswordTO usuarioPasswordTO = new UsuarioPasswordTO();
-        usuarioPasswordTO.setId(idUsuario);
+        usuarioPasswordTO.setUsuario(idUsuario);
         usuarioPasswordTO.setPassword(password);
         return usuarioPasswordTO;
     }

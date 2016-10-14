@@ -10,7 +10,7 @@ public class Cliente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable=false)
     public String password;
 
     //PERSISTENCIA

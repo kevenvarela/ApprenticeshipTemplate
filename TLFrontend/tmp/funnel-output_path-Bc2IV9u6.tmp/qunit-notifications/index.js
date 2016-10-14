@@ -1,0 +1,1 @@
+/home/pino/Escritorio/tusLibros/ApprenticeshipTemplate/TLFrontend/tmp/funnel-input_base_path-XmlEGNrJ.tmp/0/index.js

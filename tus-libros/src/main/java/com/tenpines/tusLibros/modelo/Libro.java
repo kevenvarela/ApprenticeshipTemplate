@@ -23,13 +23,13 @@ public class Libro implements Serializable, Cloneable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable=false)
     public String nombreLibro;
 
-    @Column
+    @Column(nullable=false)
     public String isbn;
 
-    @Column
+    @Column(nullable=false)
     public Integer precio;
     //TODO: Cambiar a Float.
 
