@@ -1,3 +1,7 @@
+
+
+<h1>CARRITO</h1>
+
 <table class="table">
     <thead>
     <tr>
@@ -15,14 +19,9 @@
             <td>{{libro.nombreLibro}}</td>
             <td>{{libro.isbn}}</td>
             <td>{{libro.precio}}</td>
-            <td><button {{action 'sumarUnItem'}} type="submit" class="btn btn-success">+1</button>
-                <button {{action 'restarUnItem'}} type="submit" class="btn btn-danger">-1</button>
-            </td>
             <td><h4><span class="label label-info">0</span></h4></td>
             <td><h4><form id="{{libro.cantidad}}" class="label label-info">{{catalogo.cantidad}}</form></h4></td>
         </tr>
     {{/each}}
     </tbody>
 </table>
-
-{{outlet}}
